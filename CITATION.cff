@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it using these metadata."
+type: software
+title: "route51-fleet-planning: Fleet Planning Console and Route 51 pipeline"
+abstract: >-
+  Fleet Planning Console and the five-layer Route 51 pipeline (synthetic data
+  generation, privacy aggregation, data fusion, NSGA-II headway optimisation,
+  SUMO microsimulation and economic evaluation) accompanying the master's thesis
+  "An AI System Architecture for Urban Bus Service Optimisation Based on
+  Aggregated Telecom and ATTO Fare-Payment Data: Design and Simulation-Based
+  Evaluation on a Tashkent Corridor" (IT Park University, 2026). Results release
+  route51_v2_20260922. All data are synthetic.
+authors:
+  - family-names: Grigorev
+    given-names: Andrey
+    affiliation: IT Park University
+version: 1.0.0
+date-released: "2026-11-18"
+license: MIT
+repository-code: "https://github.com/grigoryev84andrey/route51-fleet-planning"
+keywords:
+  - public transport
+  - bus service optimisation
+  - headway optimisation
+  - NSGA-II
+  - SUMO
+  - data fusion
+  - telecom data
+  - fare-payment data
+  - Tashkent
