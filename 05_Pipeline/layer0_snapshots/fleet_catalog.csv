@@ -1,0 +1,6 @@
+vehicle_id,route_id,type,capacity,seated
+BUS_51_001,51,standard_12m,85,35
+BUS_51_002,51,standard_12m,85,35
+BUS_51_003,51,midi_8m,50,25
+BUS_51_004,51,standard_12m,85,35
+BUS_51_005,51,midi_8m,50,25

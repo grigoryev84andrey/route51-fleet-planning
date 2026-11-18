@@ -1,0 +1,184 @@
+{
+  "analysis_version": "welch_primary_v1",
+  "series": "confirmatory",
+  "evidence_kind": "confirmatory",
+  "completion_status": "complete",
+  "protocol_status": "passed",
+  "effect_status": "improved",
+  "invalid_runs": [],
+  "primary": {
+    "defined": true,
+    "delta_min": 0.15094558113101186,
+    "se": 0.04808855880306187,
+    "df": 56.60820360867049,
+    "t": 3.13890839917209,
+    "p": 0.002693027383055361,
+    "ci95": [
+      0.05463545678658675,
+      0.24725570547543696
+    ],
+    "baseline_mean": 38.357089371980685,
+    "candidate_mean": 38.20614379084967,
+    "baseline_sd": 0.20031647718673384,
+    "candidate_sd": 0.17102220206792723,
+    "n_baseline": 30,
+    "n_candidate": 30,
+    "outcome": "0.5*mean_fwd + 0.5*mean_rev full-trip bus duration, min",
+    "delta_definition": "baseline - candidate"
+  },
+  "secondary_exploratory": {
+    "cohens_d": 0.8104626636842726,
+    "cohens_d_definition": "delta / sqrt((s_b^2 + s_c^2) / 2)",
+    "mann_whitney": {
+      "U": 652.0,
+      "p": 0.0028909347792481213
+    },
+    "direction_fwd": {
+      "defined": true,
+      "delta_min": 0.20711565785735075,
+      "se": 0.07377035069314082,
+      "df": 55.94658102843192,
+      "t": 2.807573176910604,
+      "p": 0.006859125964812881,
+      "ci95": [
+        0.05933277365672998,
+        0.35489854205797156
+      ],
+      "baseline_mean": 39.04780193236716,
+      "candidate_mean": 38.84068627450981,
+      "baseline_sd": 0.31188122267347707,
+      "candidate_sd": 0.2568891632306947,
+      "n_baseline": 30,
+      "n_candidate": 30
+    },
+    "direction_rev": {
+      "defined": true,
+      "delta_min": 0.09477550440465876,
+      "se": 0.05966784076348675,
+      "df": 57.176466618812675,
+      "t": 1.5883850193328237,
+      "p": 0.11771440526763262,
+      "ci95": [
+        -0.024699294227692375,
+        0.2142503030370099
+      ],
+      "baseline_mean": 37.666376811594205,
+      "candidate_mean": 37.571601307189546,
+      "baseline_sd": 0.21678230539742985,
+      "candidate_sd": 0.24456690027041642,
+      "n_baseline": 30,
+      "n_candidate": 30
+    },
+    "terminal_headway_cv": {
+      "baseline": {
+        "fwd": 0.20447549186575378,
+        "rev": 0.18117782173366426
+      },
+      "candidate": {
+        "fwd": 0.18284353685520324,
+        "rev": 0.14989431160818137
+      }
+    },
+    "depart_delay_mean_s": {
+      "baseline": 0.0,
+      "candidate": 0.14313725490196078
+    },
+    "pax_ivt_am_min": {
+      "baseline": 69170.20126102933,
+      "candidate": 68852.26734450586
+    }
+  },
+  "schema_version": 2,
+  "experiment_version": "sumo_experiment_v1",
+  "run_id": "s14_confirmatory_n30",
+  "protocol": {
+    "id": "route51_v2_protocol",
+    "version": "1.0",
+    "sha256": "0a1c6a76581b1c018497fb9fe86e9009f5d1758b868725638a3e5be3da4e7d5e"
+  },
+  "fingerprints": {
+    "input": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+    "plan_baseline": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+    "plan_candidate": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+    "model": "model:sha256:8cc55bed99342a6e4aac0a637043fcf5e00bf82e908202e07a7d96ac3f311ae1",
+    "protocol": "protocol:sha256:d23539593d481a02edcdfc6f90a95eeeabad6febe5cdc3d31622c38bb25e12fa"
+  },
+  "layer3_run_id": "s12_layer3_central",
+  "candidate_id": "43:1",
+  "boarding_speedup_18m": 0.3,
+  "seeds": {
+    "baseline": [
+      100001,
+      100002,
+      100003,
+      100004,
+      100005,
+      100006,
+      100007,
+      100008,
+      100009,
+      100010,
+      100011,
+      100012,
+      100013,
+      100014,
+      100015,
+      100016,
+      100017,
+      100018,
+      100019,
+      100020,
+      100021,
+      100022,
+      100023,
+      100024,
+      100025,
+      100026,
+      100027,
+      100028,
+      100029,
+      100030
+    ],
+    "candidate": [
+      200001,
+      200002,
+      200003,
+      200004,
+      200005,
+      200006,
+      200007,
+      200008,
+      200009,
+      200010,
+      200011,
+      200012,
+      200013,
+      200014,
+      200015,
+      200016,
+      200017,
+      200018,
+      200019,
+      200020,
+      200021,
+      200022,
+      200023,
+      200024,
+      200025,
+      200026,
+      200027,
+      200028,
+      200029,
+      200030
+    ]
+  },
+  "wall_seconds": 507.9362163543701,
+  "mean_run_seconds": 50.41140866676967,
+  "background_teleports_total": 0,
+  "operational_feasibility": "unknown",
+  "limitations": [
+    "Primary outcome is bus full-trip duration, not individual passenger in-vehicle time.",
+    "Queues at stops, denied boarding and signal priority are not modelled.",
+    "Only the 07:00-10:00 departure cohort is measured; other periods are not simulated."
+  ]
+}

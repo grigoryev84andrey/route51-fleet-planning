@@ -1,0 +1,363 @@
+{
+  "schema_version": 2,
+  "run_id": "s13_controls",
+  "evidence_kind": "exploratory",
+  "seeds": [
+    42,
+    43,
+    44
+  ],
+  "budget": 2784.0000000000005,
+  "simple_rule": {
+    "steps": [
+      {
+        "period": "am_peak",
+        "share": 0.043478260869565216,
+        "gen_cost": 310920.8449583119,
+        "cost": 2265.6
+      },
+      {
+        "period": "am_peak",
+        "share": 0.08695652173913043,
+        "gen_cost": 301713.62635863305,
+        "cost": 2278.4
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.043478260869565216,
+        "gen_cost": 292812.96348410123,
+        "cost": 2291.2000000000003
+      },
+      {
+        "period": "am_peak",
+        "share": 0.13043478260869565,
+        "gen_cost": 284483.33968703146,
+        "cost": 2304.0
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.08695652173913043,
+        "gen_cost": 276256.13611820625,
+        "cost": 2316.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.17391304347826086,
+        "gen_cost": 268426.01857808535,
+        "cost": 2329.6000000000004
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.13043478260869565,
+        "gen_cost": 260905.04388977602,
+        "cost": 2342.4
+      },
+      {
+        "period": "am_peak",
+        "share": 0.21739130434782608,
+        "gen_cost": 253471.38799725616,
+        "cost": 2355.2000000000003
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.17391304347826086,
+        "gen_cost": 246341.1132927551,
+        "cost": 2368.0
+      },
+      {
+        "period": "am_peak",
+        "share": 0.2608695652173913,
+        "gen_cost": 239274.55151838434,
+        "cost": 2380.8
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.21739130434782608,
+        "gen_cost": 232688.6982615115,
+        "cost": 2393.6000000000004
+      },
+      {
+        "period": "am_peak",
+        "share": 0.30434782608695654,
+        "gen_cost": 226150.20840366246,
+        "cost": 2406.4
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.2608695652173913,
+        "gen_cost": 220022.55082817705,
+        "cost": 2419.2000000000003
+      },
+      {
+        "period": "am_peak",
+        "share": 0.34782608695652173,
+        "gen_cost": 213920.98361673034,
+        "cost": 2432.0
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.30434782608695654,
+        "gen_cost": 208088.63484006352,
+        "cost": 2444.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.3913043478260869,
+        "gen_cost": 202267.59945443046,
+        "cost": 2457.6000000000004
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.34782608695652173,
+        "gen_cost": 196709.7141496068,
+        "cost": 2470.4
+      },
+      {
+        "period": "am_peak",
+        "share": 0.4347826086956521,
+        "gen_cost": 191487.65293323775,
+        "cost": 2483.2000000000003
+      },
+      {
+        "period": "am_peak",
+        "share": 0.4782608695652173,
+        "gen_cost": 186501.2807555628,
+        "cost": 2496.0
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.3913043478260869,
+        "gen_cost": 181527.37093414844,
+        "cost": 2508.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.5217391304347825,
+        "gen_cost": 176755.46637701866,
+        "cost": 2521.6000000000004
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.4347826086956521,
+        "gen_cost": 172019.9929408176,
+        "cost": 2534.4
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.4782608695652173,
+        "gen_cost": 167492.67218313093,
+        "cost": 2547.2000000000003
+      },
+      {
+        "period": "am_peak",
+        "share": 0.5652173913043477,
+        "gen_cost": 163246.8756323986,
+        "cost": 2560.0
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.5217391304347825,
+        "gen_cost": 159231.35549091274,
+        "cost": 2572.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.6086956521739129,
+        "gen_cost": 155280.18611271563,
+        "cost": 2585.6000000000004
+      },
+      {
+        "period": "am_peak",
+        "share": 0.652173913043478,
+        "gen_cost": 151554.77501513477,
+        "cost": 2598.4
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.5652173913043477,
+        "gen_cost": 147835.7844792159,
+        "cost": 2611.2000000000003
+      },
+      {
+        "period": "am_peak",
+        "share": 0.6956521739130432,
+        "gen_cost": 144503.86255373515,
+        "cost": 2624.0000000000005
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.6086956521739129,
+        "gen_cost": 141228.89977640507,
+        "cost": 2636.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.7391304347826084,
+        "gen_cost": 138026.37287715657,
+        "cost": 2649.6000000000004
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.652173913043478,
+        "gen_cost": 134904.89098737598,
+        "cost": 2662.4
+      },
+      {
+        "period": "am_peak",
+        "share": 0.7826086956521736,
+        "gen_cost": 131824.36511286075,
+        "cost": 2675.2000000000003
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.6956521739130432,
+        "gen_cost": 128826.50626822001,
+        "cost": 2688.0000000000005
+      },
+      {
+        "period": "am_peak",
+        "share": 0.8260869565217388,
+        "gen_cost": 125861.14023948106,
+        "cost": 2700.8
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.7391304347826084,
+        "gen_cost": 122979.70309754476,
+        "cost": 2713.6000000000004
+      },
+      {
+        "period": "am_peak",
+        "share": 0.869565217391304,
+        "gen_cost": 120222.38966039549,
+        "cost": 2726.4
+      },
+      {
+        "period": "am_peak",
+        "share": 0.9130434782608692,
+        "gen_cost": 117733.89433595879,
+        "cost": 2739.2000000000003
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.7826086956521736,
+        "gen_cost": 115260.85636776873,
+        "cost": 2752.0000000000005
+      },
+      {
+        "period": "pm_peak",
+        "share": 0.8260869565217388,
+        "gen_cost": 113162.02284851178,
+        "cost": 2764.8
+      },
+      {
+        "period": "am_peak",
+        "share": 0.9565217391304344,
+        "gen_cost": 111070.98761797002,
+        "cost": 2777.6000000000004
+      }
+    ],
+    "shares": [
+      0.9565217391304344,
+      0.0,
+      0.8260869565217388,
+      0.0
+    ],
+    "note": "baseline headways violate the spread cap; compare with optimiser_no_spread_cap (same budget)"
+  },
+  "telecom_prior": {
+    "rebuild_reproduces_frozen_matrix": false,
+    "rebuild_rows": 6820,
+    "frozen_rows": 6974,
+    "max_abs_diff": null,
+    "rebuild_total": 5750.000000000001,
+    "frozen_total": 5763.999999999999,
+    "quality_full": {
+      "alight_cosine_wtd": 0.9113095009389973,
+      "top20_od_recall": 0.8,
+      "od_mae": 0.35164737846034655
+    },
+    "quality_no_prior": {
+      "alight_cosine_wtd": 0.9071495021091369,
+      "top20_od_recall": 0.8,
+      "od_mae": 0.3329445879487316
+    },
+    "attribution": "separate paired experiment; not attributed to the central frozen-matrix result"
+  },
+  "rows": [
+    {
+      "arm": "simple_rule_baseline_headways",
+      "wait": 83332.6,
+      "crowd_min": 27738.38761797002,
+      "gen_cost": 111070.98761797002,
+      "cost": 2777.6000000000004,
+      "headway_spread": 0.96137339055794,
+      "fleet_needed": 12,
+      "max_phi": 1.0170611802646528,
+      "gen_cost_change_pct": -65.36195384131675,
+      "wait_change_pct": 0.0,
+      "cost_change_pct": 23.29545454545455,
+      "shares": "[0.9565217391304344, 0.0, 0.8260869565217388, 0.0]",
+      "within_spread_cap": false
+    },
+    {
+      "arm": "optimiser_no_spread_cap",
+      "wait": 91483.93263888889,
+      "crowd_min": 22138.94753240399,
+      "gen_cost": 113622.88017129287,
+      "cost": 2508.8,
+      "headway_spread": 1.2316136114160263,
+      "fleet_needed": 12,
+      "max_phi": 0.9804103269217823,
+      "gen_cost_change_pct": -64.56613331293518,
+      "wait_change_pct": 9.781685245496817,
+      "cost_change_pct": 11.363636363636363,
+      "cid": "43:83"
+    },
+    {
+      "arm": "optimiser_central_capped",
+      "wait": 95608.34608333332,
+      "crowd_min": 125299.71674668652,
+      "gen_cost": 220908.06283001986,
+      "cost": 2752.0000000000005,
+      "headway_spread": 0.1953958450308816,
+      "fleet_needed": 10,
+      "max_phi": 1.3561001163431672,
+      "gen_cost_change_pct": -31.108709472809732,
+      "wait_change_pct": 14.731024933019391,
+      "cost_change_pct": 22.15909090909092,
+      "cid": "43:1"
+    },
+    {
+      "arm": "plan_from_full_estimate",
+      "wait": 99853.53391666667,
+      "crowd_min": 129495.91606798343,
+      "gen_cost": 229349.4499846501,
+      "cost": 2752.0000000000005,
+      "headway_spread": 0.156479217603912,
+      "fleet_needed": 9,
+      "max_phi": 1.3810551634896646,
+      "gen_cost_change_pct": -26.53924463320056,
+      "wait_change_pct": 20.238824165723415,
+      "cost_change_pct": 22.15909090909092,
+      "cid": "43:42",
+      "scored_on": "full rebuild estimate"
+    },
+    {
+      "arm": "plan_from_no_prior_estimate",
+      "wait": 97705.37427777777,
+      "crowd_min": 139218.9880759134,
+      "gen_cost": 236924.36235369116,
+      "cost": 2752.0000000000005,
+      "headway_spread": 0.15787915666217153,
+      "fleet_needed": 9,
+      "max_phi": 1.3948036639616233,
+      "gen_cost_change_pct": -24.11299602216482,
+      "wait_change_pct": 17.652113621098867,
+      "cost_change_pct": 22.15909090909092,
+      "cid": "42:55",
+      "scored_on": "full rebuild estimate"
+    }
+  ],
+  "seconds": 61.68412685394287
+}

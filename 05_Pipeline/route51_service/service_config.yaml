@@ -1,0 +1,95 @@
+# =====================================================================
+# Route-51 Optimization Service — Layer 1 (Data ingestion & governance)
+# =====================================================================
+# Consumes Layer-0 generator OUTPUTS (the data contract between generator and
+# service). Layer 1 never imports generator internals — only its published files.
+# =====================================================================
+
+service:
+  random_seed: 42
+  api_key: "DEMO_KEY"                 # gateway auth stub; real deploy -> managed secret
+
+paths:
+  # Layer-0 dynamic feeds (generator output dir). Replace with live operator
+  # endpoints/dumps without touching code.
+  layer0_dir: "../route51_gen/output"
+  gps_file: "bus_gps_raw.csv"
+  atto_file: "atto_taps_raw.csv"       # not produced yet (contract registered)
+  telecom_file: "telecom_cdr_raw.csv"  # not produced yet (contract registered)
+  # Static reference band (Layer-0 publishes the H3 grid; stops are canonical).
+  stops_csv: "../route51_gen/data/Busstations.csv"
+  h3_grid_geojson: "../route51_gen/output/corridor_cells.geojson"
+  output_dir: "output"
+
+spatial:
+  h3_resolution: 9                     # must match the published grid
+  h3_resolution_macro: 7
+  time_bins:                           # PLACEHOLDER boundaries (align with generator)
+    am_peak:  [7, 10]
+    midday:   [10, 16]
+    pm_peak:  [16, 19]
+    off_peak_evening: [19, 24]
+    off_peak_night:   [0, 7]
+
+governance:                            # grounds the ZRU-547 mapping
+  k_anonymity: 10                      # suppress personal aggregates with support < k [Art. 16 anonymization]
+  suppress_downstream: false           # true = suppressed cells are withheld from Layer 2 as well, not only
+                                       # from the published aggregate. false reproduces the pipeline as run
+                                       # for Ch.3; the k-sensitivity sweep (§3.6.d) runs it true.
+  hash_min_hex_len: 32                 # pseudonymous IDs must be >= this many hex chars (e.g. SHA-256=64) [Art. 4]
+  localization_region: "UZ"           # telecom metadata must be tagged in-country [Art. 27-1: ZRU-666, amended by ZRU-1125 of 26.03.2026]
+  reject_on_violation: true            # fail-closed: a feed that breaches policy is quarantined, not ingested
+
+# Fleet catalog (static reference) — vehicle capacities for downstream layers.
+fleet_catalog:                         # capacities PLACEHOLDER (align with generator)
+  bus_12m: 90
+  bus_18m: 150
+
+operations:                            # Layer 3 (AI optimization) — static operational reference
+  route_km: 12.8                       # [user] one-way on-road length
+  one_way_min: 41                      # [user]
+  layover_min: 4                       # PLACEHOLDER terminal layover
+  fleet: 12                            # [user] weekday buses
+  comfort_load_factor: 0.80            # PLACEHOLDER comfortable load (above -> crowding)
+  veh_cost_small: 1.0                  # PLACEHOLDER relative per-trip cost, 12 m
+  veh_cost_large: 1.5                  # PLACEHOLDER relative per-trip cost, 18 m
+  headway_max_min: 30                  # upper bound on headway
+  tco_factor: 1.25                     # cap = baseline operating-cost index * tco_factor (an operating-cost index, not a Total Cost of Ownership; key name kept)
+  crowd_penalty: 10                    # LEGACY ONLY: weight of legacy_overcrowd_proxy in the historical control; not used by the crowding model below
+  cost_per_veh_km_uzs_12m: null        # money rate per 12 m-equivalent km; null = no sourced rate (not zero)
+  demand_scale: 3.0                    # SCENARIO: peak-loading multiplier on fused demand (placeholder mode share ~3.6% is unrealistically low; >1 represents realistic ridership so crowding binds)
+  equity_delta_default: 0.20           # cap on headway spread (max-min)/mean across periods; not a spatial-equity measure
+  equity_delta_sweep: [0.10, 0.20, 0.30, 999]   # 999 = unconstrained
+  nsga2:                               # [thesis §2.5.1] optimizer budget
+    pop: 120                           # population size
+    gen: 300                           # generations; meets the protocol convergence criterion (thesis §3.3.2)
+    seed: 42                           # fixed seed for reproducibility
+  # Baseline headways recorded in the project as a March 2024 GTFS snapshot for route 51
+  # (layer0_snapshots/gtfs_baseline_headways.csv is written by the synthetic generator; the
+  # feed itself is not in the package, so these are a scenario input, not a verified fact).
+  # The peaks were previously set to 9; midday and off-peak unchanged.
+  baseline_headways: {am_peak: 8, midday: 15, pm_peak: 8, off_peak: 20}
+
+crowding:                              # Layer 3 crowding disutility, protocol route51_v2 v1.0 (scenario assumption)
+  model: ramp                          # ramp | step | none
+  threshold: 0.80                      # theta; must equal operations.comfort_load_factor
+  multiplier_at_full_capacity: 2.0     # lambda at phi = 1
+  above_capacity: linear_extension     # lambda keeps rising linearly above phi = 1 (flagged, no queues modelled)
+  segment_times: distance              # inter-stop times proportional to distance, summing to one_way_min
+
+simulation:                            # Layer 4 (SUMO microsimulation)
+  link_speed_kmh: 30                   # PLACEHOLDER free-flow inter-stop speed; no background traffic -> running time optimistic, calibrate to real
+  dwell_base_s: 5                      # PLACEHOLDER base dwell per stop visit
+  dwell_per_pax_s: 1.5                 # PLACEHOLDER seconds per boarding/alighting pax per visit
+  boarding_speedup_18m: 0.30           # PLACEHOLDER faster boarding on 18 m (more doors)
+  assumed_one_way_min: 41              # [user] nominal one-way time used as the Layer-3 assumption
+  layover_min: 4                       # PLACEHOLDER terminal layover
+  replications:                        # thesis: n=30 peak-hour replications per condition
+    n: 30                              # [thesis] replications per condition (baseline vs optimized)
+    window: am_peak                    # peak-hour focus ("peak-hour replications")
+    warmup_min: 30                     # discard first 30 min (network fill / warm-up)
+    background_traffic: true           # seed-varying car traffic (variance source + optimism-bias fix)
+    traffic_period_s: 4                # randomTrips insertion period (smaller -> more traffic)
+    traffic_lanes: 2                   # corridor lanes when traffic on (avoid gridlock)
+    teleport_s: 300                    # SUMO time-to-teleport (prevents rare gridlock hangs)
+    design: independent                # 'independent' (thesis: independent t-test) or 'paired' (CRN, stronger)

@@ -1,0 +1,603 @@
+{
+  "schema_version": 2,
+  "layer3_run_id": "s12_layer3_central",
+  "fingerprints": {
+    "input": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+    "plan_baseline": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+    "plan_candidate": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+    "model": "model:sha256:8cc55bed99342a6e4aac0a637043fcf5e00bf82e908202e07a7d96ac3f311ae1"
+  },
+  "model_versions": {
+    "schema_version": 2,
+    "crowding_model_version": "ivt_multiplier_v1",
+    "dispatch_version": "dispatch_v1",
+    "numpy": "2.4.6",
+    "pymoo": "0.6.2",
+    "sha256:operations.py": "05f40f9cc538c0b277da446216ae9cdf18b2ac108af89b516f40add5ab1e78fd",
+    "sha256:dispatch.py": "b2166059d079210882845238b783526260819a6268936d38d819f85f6ec90aba",
+    "sha256:optimize.py": "a913674ce7e7a383598688824385537c04b27de3ea1f90b8639802c56610441b"
+  },
+  "context": {
+    "route": "51",
+    "demand_scenario_scale": 3.0,
+    "default_headway_spread_cap": 0.2,
+    "crowding": {
+      "model": "ramp",
+      "theta": 0.8,
+      "lambda_full": 2.0,
+      "above_capacity": "linear_extension",
+      "segment_times": "distance",
+      "version": "ivt_multiplier_v1"
+    },
+    "evidence": "synthetic model; no operational data"
+  },
+  "operational_feasibility": "unknown",
+  "plan_table": [
+    {
+      "period": "am_peak",
+      "baseline_headway_min": 8.0,
+      "plan_headway_min": 10.755351825013069,
+      "plan_effective_headway_min": 10.588235294117647,
+      "plan_share_18m_desired": 0.9549148647865189,
+      "plan_trips_per_direction": 17,
+      "plan_trips_18m_per_direction": 16
+    },
+    {
+      "period": "midday",
+      "baseline_headway_min": 15.0,
+      "plan_headway_min": 13.039364203556044,
+      "plan_effective_headway_min": 12.857142857142858,
+      "plan_share_18m_desired": 0.0017486772059007536,
+      "plan_trips_per_direction": 28,
+      "plan_trips_18m_per_direction": 0
+    },
+    {
+      "period": "pm_peak",
+      "baseline_headway_min": 8.0,
+      "plan_headway_min": 10.679037778270581,
+      "plan_effective_headway_min": 10.588235294117647,
+      "plan_share_18m_desired": 0.998828559939246,
+      "plan_trips_per_direction": 17,
+      "plan_trips_18m_per_direction": 17
+    },
+    {
+      "period": "off_peak",
+      "baseline_headway_min": 20.0,
+      "plan_headway_min": 13.046547103988988,
+      "plan_effective_headway_min": 12.413793103448276,
+      "plan_share_18m_desired": 0.00026812964649130817,
+      "plan_trips_per_direction": 29,
+      "plan_trips_18m_per_direction": 0
+    }
+  ],
+  "model_comparison": {
+    "basis": "layer-3 operations model on the executable dispatch (not simulation)",
+    "evidence_kind": "model_only",
+    "unit": "pax·min/day (wait, crowd_min); index (cost)",
+    "baseline": {
+      "wait": 83332.6,
+      "crowd_min": 237329.21536087064,
+      "gen_cost": 320661.8153608707,
+      "cost": 2252.8,
+      "max_phi": 1.6312508645867083,
+      "headway_spread": 0.96137339055794,
+      "fleet_needed": 12
+    },
+    "candidate": {
+      "wait": 95608.34608333332,
+      "crowd_min": 125299.71674668652,
+      "gen_cost": 220908.06283001986,
+      "cost": 2752.0000000000005,
+      "max_phi": 1.3561001163431672,
+      "headway_spread": 0.1953958450308816,
+      "fleet_needed": 10
+    },
+    "candidate_id": "43:1"
+  },
+  "headway_spread_options": {
+    "basis": "relaxed optimum per cap, seed 42 (exploratory; not re-checked on dispatch)",
+    "baseline_gen_cost_relaxed": 335936.39272390876,
+    "options": [
+      {
+        "delta": 0.1,
+        "feasible": true,
+        "gen_cost_relaxed": 257388.80881250172,
+        "wait_relaxed": 99307.857833028,
+        "crowd_min_relaxed": 158080.9509794737,
+        "cost_relaxed": 2764.915810254414
+      },
+      {
+        "delta": 0.2,
+        "feasible": true,
+        "gen_cost_relaxed": 217919.05261128306,
+        "wait_relaxed": 94394.28149840795,
+        "crowd_min_relaxed": 123524.77111287511,
+        "cost_relaxed": 2781.6967205090677
+      },
+      {
+        "delta": 0.3,
+        "feasible": true,
+        "gen_cost_relaxed": 198796.71665338517,
+        "wait_relaxed": 89703.49189974644,
+        "crowd_min_relaxed": 109093.22475363873,
+        "cost_relaxed": 2769.3687069694297
+      },
+      {
+        "delta": null,
+        "feasible": true,
+        "gen_cost_relaxed": 93327.27498245548,
+        "wait_relaxed": 80346.4984782679,
+        "crowd_min_relaxed": 12980.776504187586,
+        "cost_relaxed": 2733.632169024701
+      }
+    ]
+  },
+  "simulation": {
+    "analysis_version": "welch_primary_v1",
+    "series": "confirmatory",
+    "evidence_kind": "confirmatory",
+    "completion_status": "complete",
+    "protocol_status": "passed",
+    "effect_status": "improved",
+    "invalid_runs": [],
+    "primary": {
+      "defined": true,
+      "delta_min": 0.15094558113101186,
+      "se": 0.04808855880306187,
+      "df": 56.60820360867049,
+      "t": 3.13890839917209,
+      "p": 0.002693027383055361,
+      "ci95": [
+        0.05463545678658675,
+        0.24725570547543696
+      ],
+      "baseline_mean": 38.357089371980685,
+      "candidate_mean": 38.20614379084967,
+      "baseline_sd": 0.20031647718673384,
+      "candidate_sd": 0.17102220206792723,
+      "n_baseline": 30,
+      "n_candidate": 30,
+      "outcome": "0.5*mean_fwd + 0.5*mean_rev full-trip bus duration, min",
+      "delta_definition": "baseline - candidate"
+    },
+    "secondary_exploratory": {
+      "cohens_d": 0.8104626636842726,
+      "cohens_d_definition": "delta / sqrt((s_b^2 + s_c^2) / 2)",
+      "mann_whitney": {
+        "U": 652.0,
+        "p": 0.0028909347792481213
+      },
+      "direction_fwd": {
+        "defined": true,
+        "delta_min": 0.20711565785735075,
+        "se": 0.07377035069314082,
+        "df": 55.94658102843192,
+        "t": 2.807573176910604,
+        "p": 0.006859125964812881,
+        "ci95": [
+          0.05933277365672998,
+          0.35489854205797156
+        ],
+        "baseline_mean": 39.04780193236716,
+        "candidate_mean": 38.84068627450981,
+        "baseline_sd": 0.31188122267347707,
+        "candidate_sd": 0.2568891632306947,
+        "n_baseline": 30,
+        "n_candidate": 30
+      },
+      "direction_rev": {
+        "defined": true,
+        "delta_min": 0.09477550440465876,
+        "se": 0.05966784076348675,
+        "df": 57.176466618812675,
+        "t": 1.5883850193328237,
+        "p": 0.11771440526763262,
+        "ci95": [
+          -0.024699294227692375,
+          0.2142503030370099
+        ],
+        "baseline_mean": 37.666376811594205,
+        "candidate_mean": 37.571601307189546,
+        "baseline_sd": 0.21678230539742985,
+        "candidate_sd": 0.24456690027041642,
+        "n_baseline": 30,
+        "n_candidate": 30
+      },
+      "terminal_headway_cv": {
+        "baseline": {
+          "fwd": 0.20447549186575378,
+          "rev": 0.18117782173366426
+        },
+        "candidate": {
+          "fwd": 0.18284353685520324,
+          "rev": 0.14989431160818137
+        }
+      },
+      "depart_delay_mean_s": {
+        "baseline": 0.0,
+        "candidate": 0.14313725490196078
+      },
+      "pax_ivt_am_min": {
+        "baseline": 69170.20126102933,
+        "candidate": 68852.26734450586
+      }
+    },
+    "schema_version": 2,
+    "experiment_version": "sumo_experiment_v1",
+    "run_id": "s14_confirmatory_n30",
+    "protocol": {
+      "id": "route51_v2_protocol",
+      "version": "1.0",
+      "sha256": "0a1c6a76581b1c018497fb9fe86e9009f5d1758b868725638a3e5be3da4e7d5e"
+    },
+    "fingerprints": {
+      "input": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+      "plan_baseline": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+      "plan_candidate": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+      "model": "model:sha256:8cc55bed99342a6e4aac0a637043fcf5e00bf82e908202e07a7d96ac3f311ae1",
+      "protocol": "protocol:sha256:d23539593d481a02edcdfc6f90a95eeeabad6febe5cdc3d31622c38bb25e12fa"
+    },
+    "layer3_run_id": "s12_layer3_central",
+    "candidate_id": "43:1",
+    "boarding_speedup_18m": 0.3,
+    "seeds": {
+      "baseline": [
+        100001,
+        100002,
+        100003,
+        100004,
+        100005,
+        100006,
+        100007,
+        100008,
+        100009,
+        100010,
+        100011,
+        100012,
+        100013,
+        100014,
+        100015,
+        100016,
+        100017,
+        100018,
+        100019,
+        100020,
+        100021,
+        100022,
+        100023,
+        100024,
+        100025,
+        100026,
+        100027,
+        100028,
+        100029,
+        100030
+      ],
+      "candidate": [
+        200001,
+        200002,
+        200003,
+        200004,
+        200005,
+        200006,
+        200007,
+        200008,
+        200009,
+        200010,
+        200011,
+        200012,
+        200013,
+        200014,
+        200015,
+        200016,
+        200017,
+        200018,
+        200019,
+        200020,
+        200021,
+        200022,
+        200023,
+        200024,
+        200025,
+        200026,
+        200027,
+        200028,
+        200029,
+        200030
+      ]
+    },
+    "wall_seconds": 507.9362163543701,
+    "mean_run_seconds": 50.41140866676967,
+    "background_teleports_total": 0,
+    "operational_feasibility": "unknown",
+    "limitations": [
+      "Primary outcome is bus full-trip duration, not individual passenger in-vehicle time.",
+      "Queues at stops, denied boarding and signal priority are not modelled.",
+      "Only the 07:00-10:00 departure cohort is measured; other periods are not simulated."
+    ]
+  },
+  "economics": {
+    "schema_version": 2,
+    "economics_version": "economics_scoped_v1",
+    "run_id": "s14_economics",
+    "layer3_run_id": "s12_layer3_central",
+    "simulation_run_id": "s14_confirmatory_n30",
+    "simulation_verdict": {
+      "applicable": true,
+      "input_match": "exact",
+      "plan_match": "exact",
+      "evidence_kind": "confirmatory",
+      "effect_status": "improved",
+      "operational_feasibility": "unknown",
+      "validation_issues": []
+    },
+    "value_of_time": {
+      "value_uzs_per_pax_h": 27929.970985714284,
+      "definition": "0.45 x net hourly wage",
+      "source": "average monthly nominal accrued wage, Tashkent city (MHOBT 1726), indicator 2.02.02.1200, National Statistics Committee",
+      "reference_period": "2026 Q1-Q2 mean (Q1 preliminary)",
+      "transformation": "gross -> net with 12% PIT; /168 h per month; x 0.45",
+      "evidence_type": "published source with a transfer assumption (0.45)",
+      "sensitivity": "+-30% (not a confidence interval)"
+    },
+    "days_per_year": {
+      "value": 250,
+      "evidence_type": "scenario_assumption"
+    },
+    "operator_rate": {
+      "value": null,
+      "status": "unknown",
+      "note": "null = no sourced rate; zero would be a different statement"
+    },
+    "resources": {
+      "all_day": {
+        "baseline": {
+          "scope_periods": [
+            "am_peak",
+            "midday",
+            "pm_peak",
+            "off_peak"
+          ],
+          "trips": 176,
+          "trips_18m": 0,
+          "veh_km": 2252.8,
+          "veh_km_18m": 0,
+          "cost_ratio_r": 1.5,
+          "equiv_12m_km": 2252.8,
+          "cost_index": 2252.8,
+          "capacity_km": 202752.0,
+          "running_veh_h": 120.26666666666667,
+          "normative_veh_h": 132.0,
+          "resources_version": "resources_v1"
+        },
+        "candidate": {
+          "scope_periods": [
+            "am_peak",
+            "midday",
+            "pm_peak",
+            "off_peak"
+          ],
+          "trips": 182,
+          "trips_18m": 66,
+          "veh_km": 2329.6000000000004,
+          "veh_km_18m": 844.8000000000001,
+          "cost_ratio_r": 1.5,
+          "equiv_12m_km": 2752.0,
+          "cost_index": 2752.0,
+          "capacity_km": 260352.0,
+          "running_veh_h": 124.36666666666666,
+          "normative_veh_h": 136.5,
+          "resources_version": "resources_v1"
+        }
+      },
+      "am_peak": {
+        "baseline": {
+          "scope_periods": [
+            "am_peak"
+          ],
+          "trips": 46,
+          "trips_18m": 0,
+          "veh_km": 588.8000000000001,
+          "veh_km_18m": 0,
+          "cost_ratio_r": 1.5,
+          "equiv_12m_km": 588.8000000000001,
+          "cost_index": 588.8000000000001,
+          "capacity_km": 52992.0,
+          "running_veh_h": 31.433333333333334,
+          "normative_veh_h": 34.5,
+          "resources_version": "resources_v1"
+        },
+        "candidate": {
+          "scope_periods": [
+            "am_peak"
+          ],
+          "trips": 34,
+          "trips_18m": 32,
+          "veh_km": 435.20000000000005,
+          "veh_km_18m": 409.6,
+          "cost_ratio_r": 1.5,
+          "equiv_12m_km": 640.0000000000001,
+          "cost_index": 640.0000000000001,
+          "capacity_km": 63744.0,
+          "running_veh_h": 23.233333333333334,
+          "normative_veh_h": 25.5,
+          "resources_version": "resources_v1"
+        }
+      }
+    },
+    "scopes": {
+      "am_peak": {
+        "scope": "am_peak",
+        "day_type": "weekday (scenario)",
+        "annualisation_days": 250,
+        "evidence_kind": "model_plus_simulation_derived",
+        "input_fingerprint": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+        "plan_fingerprint": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+        "baseline_plan_fingerprint": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+        "status": "evaluated",
+        "reason_code": null,
+        "inputs": {
+          "wait_base": 28844.4,
+          "wait_plan": 39062.81316666667,
+          "crowd_min_base": 128965.8228641919,
+          "crowd_min_plan": 72819.18500002395,
+          "equiv_km_base_per_day": 588.8000000000001,
+          "equiv_km_plan_per_day": 640.0000000000001,
+          "ivt_benefit_pax_min_per_day": 317.93391652347054,
+          "rate_12m_uzs_per_km": null,
+          "value_of_time": 27929.970985714284
+        },
+        "by_wait_weight": {
+          "wait_weight_1": {
+            "wait_benefit_h": -42576.72152777777,
+            "crowd_benefit_h": 233944.32443403313,
+            "passenger_model_uzs": 5344891596.777404,
+            "passenger_model_uzs_vot_minus_30": 3741424117.7441826,
+            "passenger_model_uzs_vot_plus_30": 6948359075.810625,
+            "ivt_benefit_h": 1324.7246521811273,
+            "ivt_benefit_uzs": 36999521.09947933,
+            "passenger_with_ivt_uzs": 5381891117.8768835,
+            "passenger_with_ivt_reason": null,
+            "delta_equiv_12m_km_year": 12800.000000000011,
+            "operator_delta_cost_uzs": null,
+            "operator_delta_cost_reason": "no_sourced_rate",
+            "combined_uzs": null,
+            "combined_reason": "no_sourced_rate",
+            "rate_threshold_uzs_per_equiv_km": {
+              "kind": "max_rate",
+              "value": 420460.2435841312,
+              "text": "balance >= 0 for c <= B / dK"
+            },
+            "rate_threshold_model_only": {
+              "kind": "max_rate",
+              "value": 417569.65599823435,
+              "text": "balance >= 0 for c <= B / dK"
+            }
+          },
+          "wait_weight_2": {
+            "wait_benefit_h": -85153.44305555554,
+            "crowd_benefit_h": 233944.32443403313,
+            "passenger_model_uzs": 4155724999.8397346,
+            "passenger_model_uzs_vot_minus_30": 2909007499.887814,
+            "passenger_model_uzs_vot_plus_30": 5402442499.791656,
+            "ivt_benefit_h": 1324.7246521811273,
+            "ivt_benefit_uzs": 36999521.09947933,
+            "passenger_with_ivt_uzs": 4192724520.9392138,
+            "passenger_with_ivt_reason": null,
+            "delta_equiv_12m_km_year": 12800.000000000011,
+            "operator_delta_cost_uzs": null,
+            "operator_delta_cost_reason": "no_sourced_rate",
+            "combined_uzs": null,
+            "combined_reason": "no_sourced_rate",
+            "rate_threshold_uzs_per_equiv_km": {
+              "kind": "max_rate",
+              "value": 327556.6031983758,
+              "text": "balance >= 0 for c <= B / dK"
+            },
+            "rate_threshold_model_only": {
+              "kind": "max_rate",
+              "value": 324666.015612479,
+              "text": "balance >= 0 for c <= B / dK"
+            }
+          }
+        }
+      },
+      "all_day_model": {
+        "scope": "all_day_model",
+        "day_type": "weekday (scenario)",
+        "annualisation_days": 250,
+        "evidence_kind": "model_only",
+        "input_fingerprint": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+        "plan_fingerprint": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+        "baseline_plan_fingerprint": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+        "status": "evaluated",
+        "reason_code": null,
+        "inputs": {
+          "wait_base": 83332.6,
+          "wait_plan": 95608.34608333332,
+          "crowd_min_base": 237329.21536087064,
+          "crowd_min_plan": 125299.71674668652,
+          "equiv_km_base_per_day": 2252.8,
+          "equiv_km_plan_per_day": 2752.0,
+          "ivt_benefit_pax_min_per_day": null,
+          "rate_12m_uzs_per_km": null,
+          "value_of_time": 27929.970985714284
+        },
+        "by_wait_weight": {
+          "wait_weight_1": {
+            "wait_benefit_h": -51148.94201388882,
+            "crowd_benefit_h": 466789.5775591005,
+            "passenger_model_uzs": 11608830891.261608,
+            "passenger_model_uzs_vot_minus_30": 8126181623.883125,
+            "passenger_model_uzs_vot_plus_30": 15091480158.64009,
+            "ivt_benefit_h": null,
+            "ivt_benefit_uzs": null,
+            "passenger_with_ivt_uzs": null,
+            "passenger_with_ivt_reason": "not_carried_over_from_morning_simulation",
+            "delta_equiv_12m_km_year": 124799.99999999996,
+            "operator_delta_cost_uzs": null,
+            "operator_delta_cost_reason": "no_sourced_rate",
+            "combined_uzs": null,
+            "combined_reason": "no_sourced_rate",
+            "rate_threshold_uzs_per_equiv_km": {
+              "kind": "unknown",
+              "text": "Threshold unknown: benefit or kilometre change unknown."
+            },
+            "rate_threshold_model_only": {
+              "kind": "max_rate",
+              "value": 93019.47829536548,
+              "text": "balance >= 0 for c <= B / dK"
+            }
+          },
+          "wait_weight_2": {
+            "wait_benefit_h": -102297.88402777765,
+            "crowd_benefit_h": 466789.5775591005,
+            "passenger_model_uzs": 10180242424.86371,
+            "passenger_model_uzs_vot_minus_30": 7126169697.404597,
+            "passenger_model_uzs_vot_plus_30": 13234315152.322824,
+            "ivt_benefit_h": null,
+            "ivt_benefit_uzs": null,
+            "passenger_with_ivt_uzs": null,
+            "passenger_with_ivt_reason": "not_carried_over_from_morning_simulation",
+            "delta_equiv_12m_km_year": 124799.99999999996,
+            "operator_delta_cost_uzs": null,
+            "operator_delta_cost_reason": "no_sourced_rate",
+            "combined_uzs": null,
+            "combined_reason": "no_sourced_rate",
+            "rate_threshold_uzs_per_equiv_km": {
+              "kind": "unknown",
+              "text": "Threshold unknown: benefit or kilometre change unknown."
+            },
+            "rate_threshold_model_only": {
+              "kind": "max_rate",
+              "value": 81572.4553274336,
+              "text": "balance >= 0 for c <= B / dK"
+            }
+          }
+        }
+      },
+      "all_day_with_simulation": {
+        "scope": "all_day_with_simulation",
+        "status": "not_evaluated",
+        "reason_code": "not_evaluated",
+        "message": "Only the morning cohort is simulated; no comparable all-period simulation."
+      }
+    },
+    "fingerprints": {
+      "input": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+      "plan_baseline": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+      "plan_candidate": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940"
+    }
+  },
+  "governance": {
+    "present": false
+  },
+  "limitations": [
+    "Synthetic methods demonstration — not an empirical claim about real Line 51.",
+    "Demand scenario ×3.0 is a labelled assumption.",
+    "Crowding parameters (theta, lambda) are scenario assumptions, not local measurements.",
+    "Every trip of a period is modelled as an average vehicle; queues and denied boarding are not modelled.",
+    "Fleet check is normative (departures per cycle), not a vehicle-block schedule; operational feasibility is unknown.",
+    "The headway-spread cap limits variation between periods; it is not a spatial-equity measure."
+  ]
+}

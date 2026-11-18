@@ -1,0 +1,4 @@
+# Install the shared pipeline and the console with the verified versions.
+# A matching saved result can be opened without SUMO. A new simulation requires
+# native Eclipse SUMO 1.27.0 on PATH and SUMO_HOME with tools/randomTrips.py.
+-r ../05_Pipeline/route51_service/requirements.txt

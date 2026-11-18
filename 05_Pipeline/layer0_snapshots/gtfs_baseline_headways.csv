@@ -1,0 +1,6 @@
+route_id,period,start,end,headway_min
+51,morning_peak,07:00,09:00,8
+51,midday,09:00,16:00,15
+51,evening_peak,16:00,19:00,8
+51,evening,19:00,23:00,20
+51,early_morning,05:30,07:00,20

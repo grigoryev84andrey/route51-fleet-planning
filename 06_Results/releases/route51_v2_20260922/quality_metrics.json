@@ -1,0 +1,34 @@
+{
+  "release_id": "route51_v2_20260922",
+  "computed_at": "2026-09-23T10:49:35+00:00",
+  "function": "layer2.validation.validate",
+  "function_version": "layer2_validate_v2",
+  "definition": {
+    "alight_cosine_wtd": "boarding-weighted cosine between the fused and the true alighting distribution of each (board_stop, hour)",
+    "top20_od_recall": "share of the 20 largest true OD pairs present among the 20 largest fused pairs"
+  },
+  "pair": {
+    "fused": {
+      "path": "06_Results/tables/fused_demand_matrix.csv",
+      "sha256": "2f0af31416d4723bfba55da2a3bcce8f51b1f45ae9e20f0b685210c048207b13"
+    },
+    "oracle": {
+      "path": "05_Pipeline/route51_gen/output/ground_truth_bus_od.csv",
+      "sha256": "849ea81077dd4421992cfa606eaa065d68a29f1479fc4f4d308183f345901783"
+    }
+  },
+  "metrics": {
+    "od_cells": 7022,
+    "total_fused": 5764.0,
+    "total_truth": 5750.0,
+    "total_error_pct": 0.24347826086956523,
+    "od_mae": 0.4420292845827618,
+    "od_rmse": 3.56630199662957,
+    "boarding_mae": 2.5595567867036015,
+    "alight_cosine_wtd": 0.881564629531548,
+    "top20_od_recall": 0.65,
+    "validation_version": "layer2_validate_v2",
+    "reason_codes": []
+  },
+  "note": "These metrics belong to this pair of files only. The figures 0.906 and 0.911 quoted in earlier drafts come from other runs and are not the quality of this matrix."
+}

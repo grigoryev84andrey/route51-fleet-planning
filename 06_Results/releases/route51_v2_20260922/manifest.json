@@ -1,0 +1,938 @@
+{
+  "release_id": "route51_v2_20260922",
+  "created": "2026-09-23T10:49:35+00:00",
+  "created_by": "build_release_package.py (packer; not a source of scientific numbers)",
+  "scope_disclaimer": "Results describe the specified synthetic model of Tashkent Line 51 and do not establish operational benefits.",
+  "protocol": {
+    "path": "protocol.json",
+    "sha256": "0a1c6a76581b1c018497fb9fe86e9009f5d1758b868725638a3e5be3da4e7d5e",
+    "freeze": {
+      "path": "freeze_S14.json",
+      "sha256": "8a6f0fa4e32b2e7a7e0b7c3e594b2596aaee288264ff88e359735a55b8ab9698"
+    }
+  },
+  "quality": {
+    "path": "quality_metrics.json",
+    "sha256": "9d841b79a22b0c84df53cda9632b74e6ae6964e444b1793fa6fa6e11dcd5cc3e",
+    "alight_cosine_wtd": 0.881564629531548,
+    "top20_od_recall": 0.65
+  },
+  "runs": {
+    "s12_layer3_central": {
+      "script": "run_layer3",
+      "script_sha256": "f04352396987282fd600750f745360c20076db88b1e03dda76a819df210b9dd6",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_layer3.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s12_layer3_central",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_controls": {
+      "script": "run_controls",
+      "script_sha256": "f87dd5d045e7d970fd8fd0372bbaf6238d14df1687f097535bd62c85f1a7b4d6",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_controls.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_controls",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_convergence": {
+      "script": "run_convergence",
+      "script_sha256": "9b5b1bc574537fa27b0c38e4b3ca2217c03889278f51777a8983d0f83a775e2a",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_convergence.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_convergence",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_equity_curve": {
+      "script": "run_equity_curve",
+      "script_sha256": "c82cfbe334fce8dd1f98a7bd17063853c3240733b0492b64d5cab3412d54d92e",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_equity_curve.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_equity_curve",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_kanon_sweep": {
+      "script": "run_kanon_sweep",
+      "script_sha256": "76714e8123997524ecc862e1084e886f818a4a92a6dc70278191393b26589ec8",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_kanon_sweep.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_kanon_sweep",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_quality_curve": {
+      "script": "run_quality_curve",
+      "script_sha256": "db0dd3fc21247a560b124504c5894e9d12866d7e7e4bacca48f298c699d22fb0",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_quality_curve.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_quality_curve"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_sensitivity_layer3": {
+      "script": "run_sensitivity",
+      "script_sha256": "976a499c0e2bed9e5d3c7ddfb174e489f00917468e525fe3ee2bd612aaba8f46",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_sensitivity.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_sensitivity_layer3",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s13_tco_sweep": {
+      "script": "run_tco_sweep",
+      "script_sha256": "720bd7d5d70770606eb656f732a1642ed6fa4d6feac62afd83e43f058d86e008",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_tco_sweep.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s13_tco_sweep",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s14_confirmatory_n30": {
+      "script": "run_replications",
+      "script_sha256": "b84b01fec2451571fd5492bae1d8d1f539ecefbd4fd71b12982b2eda7405ec5d",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_replications.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s14_confirmatory_n30",
+        "--protocol",
+        "../../06_Results/releases/route51_v2_20260922/protocol.json",
+        "--input-dir",
+        "../../06_Results/runs/s12_layer3_central",
+        "--input",
+        "fused_demand_matrix.csv=../../06_Results/tables/fused_demand_matrix.csv",
+        "--series",
+        "confirmatory",
+        "--workers",
+        "6"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s14_economics": {
+      "script": "run_economics",
+      "script_sha256": "f16280f7e82ed425beb6b35111ee8b751daeb17ecaad77f780e6e5b40e3c991c",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_economics.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s14_economics",
+        "--input-dir",
+        "../../06_Results/runs/s12_layer3_central",
+        "--input",
+        "fused_demand_matrix.csv=../../06_Results/tables/fused_demand_matrix.csv",
+        "--input",
+        "simulation_analysis.json=../../06_Results/runs/s14_confirmatory_n30/simulation_analysis.json"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s14_sensitivity_speedup0": {
+      "script": "run_replications",
+      "script_sha256": "b84b01fec2451571fd5492bae1d8d1f539ecefbd4fd71b12982b2eda7405ec5d",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_replications.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s14_sensitivity_speedup0",
+        "--protocol",
+        "../../06_Results/releases/route51_v2_20260922/protocol.json",
+        "--input-dir",
+        "../../06_Results/runs/s12_layer3_central",
+        "--input",
+        "fused_demand_matrix.csv=../../06_Results/tables/fused_demand_matrix.csv",
+        "--series",
+        "sensitivity",
+        "--speedup",
+        "0.0",
+        "--workers",
+        "6"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s14_sensitivity_speedup15": {
+      "script": "run_replications",
+      "script_sha256": "b84b01fec2451571fd5492bae1d8d1f539ecefbd4fd71b12982b2eda7405ec5d",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_replications.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s14_sensitivity_speedup15",
+        "--protocol",
+        "../../06_Results/releases/route51_v2_20260922/protocol.json",
+        "--input-dir",
+        "../../06_Results/runs/s12_layer3_central",
+        "--input",
+        "fused_demand_matrix.csv=../../06_Results/tables/fused_demand_matrix.csv",
+        "--series",
+        "sensitivity",
+        "--speedup",
+        "0.15",
+        "--workers",
+        "6"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s14_table31": {
+      "script": "build_table31",
+      "script_sha256": "45c454de39eaead6907b42f182a270174caec86cd1d95e3f54cf53dd488639c2",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "build_table31.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s14_table31",
+        "--input",
+        "layer3_result.json=../../06_Results/runs/s12_layer3_central/layer3_result.json",
+        "--input",
+        "simulation_analysis.json=../../06_Results/runs/s14_confirmatory_n30/simulation_analysis.json",
+        "--input",
+        "coverage_h2.csv=../../06_Results/tables/coverage_h2.csv"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s15_fig_pareto": {
+      "script": "make_pareto_fig",
+      "script_sha256": "f9b9d1967c762d7b1c6f7272c3a27813a74f6e78b459bb944b6c5b65f9b7e883",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "make_pareto_fig.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s15_fig_pareto",
+        "--input-dir",
+        "../../06_Results/runs/s12_layer3_central"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s15_fig_runs": {
+      "script": "make_fig_runs",
+      "script_sha256": "bc74e954447318d133ef39fcb195c0e1844160ffc348cdaa83a2a878678c82f5",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "make_fig_runs.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s15_fig_runs",
+        "--input",
+        "runs_confirmatory.csv=../../06_Results/runs/s14_confirmatory_n30/runs.csv",
+        "--input",
+        "runs_speedup0.csv=../../06_Results/runs/s14_sensitivity_speedup0/runs.csv",
+        "--input",
+        "runs_speedup15.csv=../../06_Results/runs/s14_sensitivity_speedup15/runs.csv"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s15_layer5": {
+      "script": "run_layer5",
+      "script_sha256": "a7e22bd5e5b1c5b93711480878697521760b18025b5c08762400c72d4797c549",
+      "config_sha256": "1289fd8649c131d85cc0e6e5a7d4653a572b53bb4816335d430cf175de1f06b8",
+      "argv": [
+        "run_layer5.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s15_layer5",
+        "--input",
+        "layer3_result.json=../../06_Results/runs/s12_layer3_central/layer3_result.json",
+        "--input",
+        "simulation_analysis.json=../../06_Results/runs/s14_confirmatory_n30/simulation_analysis.json",
+        "--input",
+        "economics_result.json=../../06_Results/runs/s14_economics/economics_result.json"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s20_fig_convergence": {
+      "script": "make_fig_convergence",
+      "script_sha256": "a1749b5853b8a04a50943eca845f6e0e876d267172b29de7a0a9a69bcedb38f7",
+      "config_sha256": "930dc97e6b1ef0d3f6a206d14cac5c0fa408351a89b4c7751adcc67e06fc41f3",
+      "argv": [
+        "make_fig_convergence.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s20_fig_convergence",
+        "--input",
+        "nsga2_convergence_seeds.csv=../../06_Results/runs/s13_convergence/nsga2_convergence_seeds.csv"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    },
+    "s23_controls_feasible": {
+      "script": "run_controls",
+      "script_sha256": "cea5a55da501b1b2946b7c009de2f59e135e59b6f9809de037e883d949435ea3",
+      "config_sha256": "930dc97e6b1ef0d3f6a206d14cac5c0fa408351a89b4c7751adcc67e06fc41f3",
+      "argv": [
+        "run_controls.py",
+        "--output-dir",
+        "../../06_Results/runs",
+        "--run-id",
+        "s23_controls_feasible",
+        "--input-dir",
+        "../../06_Results/tables"
+      ],
+      "started": null,
+      "versions": {
+        "python": "3.13.13",
+        "platform": "Windows-11-10.0.22631-SP0",
+        "numpy": "2.4.6",
+        "pandas": "3.0.3",
+        "scipy": "1.18.0",
+        "pymoo": "0.6.2",
+        "yaml": "6.0.3"
+      }
+    }
+  },
+  "files": [
+    {
+      "path": "figures/fig3_2_nsga2_convergence.png",
+      "sha256": "58265c31f09a72df2667a1378a857c916f71c1ddc238ffce0cbf73b0b7984d8b",
+      "bytes": 124359,
+      "origin": "06_Results/runs/s20_fig_convergence/fig3_2_nsga2_convergence.png"
+    },
+    {
+      "path": "figures/fig3_3_pareto_front.png",
+      "sha256": "65e623a2e23d095f12aa65f6099c5f86d1846a644121f386234a00eca255ec8c",
+      "bytes": 289561,
+      "origin": "06_Results/runs/s15_fig_pareto/fig3_3_pareto_front.png"
+    },
+    {
+      "path": "figures/fig3_4_equity_frontier.png",
+      "sha256": "a419e2d3bdec37a4ff22e7b73c6fe4ca523b00d4c10b56ab3a3caa6eece1ed20",
+      "bytes": 100240,
+      "origin": "06_Results/runs/s13_equity_curve/fig3_4_equity_frontier.png"
+    },
+    {
+      "path": "figures/fig3_5_tco_sensitivity.png",
+      "sha256": "f3c08fa54454591e41de13e24d3b86403da54eff5b1a830453bd695baa82970a",
+      "bytes": 84089,
+      "origin": "06_Results/runs/s13_tco_sweep/fig3_5_tco_sensitivity.png"
+    },
+    {
+      "path": "figures/fig3_6_data_quality.png",
+      "sha256": "a277cef98434acdb0d8456e5824ecb3fc1edf694a4e25522977aa0dd29f3f012",
+      "bytes": 151736,
+      "origin": "06_Results/runs/s13_quality_curve/fig3_6_data_quality.png"
+    },
+    {
+      "path": "figures/fig3_7_kanon_sensitivity.png",
+      "sha256": "cf641097151642e100d4aba9e1d1625d7d0c3a747e3fb05fdc3c093506c76480",
+      "bytes": 163190,
+      "origin": "06_Results/runs/s13_kanon_sweep/fig3_7_kanon_sensitivity.png"
+    },
+    {
+      "path": "figures/fig3_runs_duration.png",
+      "sha256": "4cb604275ef9312920ce55dcbfb62a341e83727849fd8f6dbfbc3733bd27809e",
+      "bytes": 95441,
+      "origin": "06_Results/runs/s15_fig_runs/fig3_runs_duration.png"
+    },
+    {
+      "path": "figures/figB1_architecture.png",
+      "sha256": "d87a11a3c1f4863a99d32b6b890458de0370141bd591e28ce989bcb0eb3deb16",
+      "bytes": 343552,
+      "origin": "06_Results/runs/s20_annex_diagrams/figB1_architecture.png"
+    },
+    {
+      "path": "figures/figB1_architecture.svg",
+      "sha256": "f930f14a84acbbc0d7f6cc6033eee3c4057aed6324ad6950d926f13a7368baa1",
+      "bytes": 154804,
+      "origin": "06_Results/runs/s20_annex_diagrams/figB1_architecture.svg"
+    },
+    {
+      "path": "figures/figC1_pipeline.png",
+      "sha256": "ae047d0c140b8687f316c89ecfc03e24ba74104b740d40a798c1341e7ddb469d",
+      "bytes": 250290,
+      "origin": "06_Results/runs/s20_annex_diagrams/figC1_pipeline.png"
+    },
+    {
+      "path": "figures/figC1_pipeline.svg",
+      "sha256": "f8a95b893c63b69fb684d7d46f2fb6c5de68b38c63672a43f7e9b8e5a911921b",
+      "bytes": 113419,
+      "origin": "06_Results/runs/s20_annex_diagrams/figC1_pipeline.svg"
+    },
+    {
+      "path": "inputs/fused_demand_matrix.csv",
+      "sha256": "2f0af31416d4723bfba55da2a3bcce8f51b1f45ae9e20f0b685210c048207b13",
+      "bytes": 219549,
+      "origin": "06_Results/tables/fused_demand_matrix.csv"
+    },
+    {
+      "path": "inputs/generator_config.yaml",
+      "sha256": "7635b58c5b33c6241e2fbad5a1aa8222f0bf28fb7e3de6ed6357fccfe4f67979",
+      "bytes": 16416,
+      "origin": "05_Pipeline/route51_gen/config.yaml"
+    },
+    {
+      "path": "inputs/ground_truth_bus_od.csv",
+      "sha256": "849ea81077dd4421992cfa606eaa065d68a29f1479fc4f4d308183f345901783",
+      "bytes": 7135,
+      "origin": "05_Pipeline/route51_gen/output/ground_truth_bus_od.csv"
+    },
+    {
+      "path": "inputs/service_config.yaml",
+      "sha256": "930dc97e6b1ef0d3f6a206d14cac5c0fa408351a89b4c7751adcc67e06fc41f3",
+      "bytes": 6903,
+      "origin": "05_Pipeline/route51_service/service_config.yaml"
+    },
+    {
+      "path": "tables/DECISION_BRIEF.md",
+      "sha256": "e3391221637f1b7f734eb7aee781e09d921ced71638d263ca1151d9ef78374de",
+      "bytes": 2867,
+      "origin": "06_Results/runs/s15_layer5/DECISION_BRIEF.md"
+    },
+    {
+      "path": "tables/controls.csv",
+      "sha256": "81876ffa70b71a4c2c8edfad84a3654fc2c3f0db5a2ef37c77e3529b98882d1d",
+      "bytes": 1251,
+      "origin": "06_Results/runs/s13_controls/controls.csv"
+    },
+    {
+      "path": "tables/controls.json",
+      "sha256": "d6aa190b3b22c155527fae8cf9271e3e7fce66598c20479acf8ca8314c21e04a",
+      "bytes": 10104,
+      "origin": "06_Results/runs/s13_controls/controls.json"
+    },
+    {
+      "path": "tables/decision_record.json",
+      "sha256": "716033019f994c8a1cab5a9a15b4e88c770880223a4065da1486619a6e660d43",
+      "bytes": 21708,
+      "origin": "06_Results/runs/s15_layer5/decision_record.json"
+    },
+    {
+      "path": "tables/dispatch_baseline.csv",
+      "sha256": "348992199bcae519b1c0a5a508617eeb7d90875e55d1f5576eba134bebf1a470",
+      "bytes": 13303,
+      "origin": "06_Results/runs/s12_layer3_central/dispatch_baseline.csv"
+    },
+    {
+      "path": "tables/dispatch_candidate.csv",
+      "sha256": "9707c7a3cb930f1bc47e2387a30b65214f1b3990e0214562dbf7f9f0fe1e2bab",
+      "bytes": 14039,
+      "origin": "06_Results/runs/s12_layer3_central/dispatch_candidate.csv"
+    },
+    {
+      "path": "tables/economics.csv",
+      "sha256": "e6e26d2918a0e546c40d24fcf1efd27b7ca4825e6990c319c6e316ff06d079f4",
+      "bytes": 5665,
+      "origin": "06_Results/runs/s14_economics/economics.csv"
+    },
+    {
+      "path": "tables/economics_result.json",
+      "sha256": "689c16a19d8ef8c3f96f99f29ee60e71118cff619fd78eed91b610f222fcc2f7",
+      "bytes": 10485,
+      "origin": "06_Results/runs/s14_economics/economics_result.json"
+    },
+    {
+      "path": "tables/equity_curve.csv",
+      "sha256": "3801d21f0d9604293b010d281566096293638adb620ea900a3558f8c71ea361d",
+      "bytes": 4072,
+      "origin": "06_Results/runs/s13_equity_curve/equity_curve.csv"
+    },
+    {
+      "path": "tables/kanon_sweep.csv",
+      "sha256": "2a61bfbc24eb2cc919803748eaac2eafc0d5c5687e15a872015b402540ea3483",
+      "bytes": 1072,
+      "origin": "06_Results/runs/s13_kanon_sweep/kanon_sweep.csv"
+    },
+    {
+      "path": "tables/layer3_result.json",
+      "sha256": "08274321915e4d00510e288af0a368c720c8b50a2897c6c0a74b11e7723fa217",
+      "bytes": 18847,
+      "origin": "06_Results/runs/s12_layer3_central/layer3_result.json"
+    },
+    {
+      "path": "tables/nsga2_convergence_seeds.csv",
+      "sha256": "cd51f987c20f4bdf42ea79b75260bc2e1ecf4c53ee27b433dff03acca27656d3",
+      "bytes": 66730,
+      "origin": "06_Results/runs/s13_convergence/nsga2_convergence_seeds.csv"
+    },
+    {
+      "path": "tables/nsga2_convergence_summary.csv",
+      "sha256": "323e97afe17e8c79e08e5f016c87b04b5ee22746cc0beb59e5e54f8e4741af0c",
+      "bytes": 28821,
+      "origin": "06_Results/runs/s13_convergence/nsga2_convergence_summary.csv"
+    },
+    {
+      "path": "tables/pareto_front.csv",
+      "sha256": "1a36b1389ae7d8ab032648b2876fd73bcfaf81488bfd06ca4d5c8f57ffd2ed5d",
+      "bytes": 89488,
+      "origin": "06_Results/runs/s15_fig_pareto/pareto_front.csv"
+    },
+    {
+      "path": "tables/quality_curve.csv",
+      "sha256": "0470b4d3dbc624a3b2d64bd11bded54e9ef266ddece628610e3d9c9588c3bf0d",
+      "bytes": 862,
+      "origin": "06_Results/runs/s13_quality_curve/quality_curve.csv"
+    },
+    {
+      "path": "tables/s14_confirmatory_n30__runs.csv",
+      "sha256": "420ccfae2bb41b46c8eca2024aced1265340c95b4683b548bda4710f8b1d7bdd",
+      "bytes": 13599,
+      "origin": "06_Results/runs/s14_confirmatory_n30/runs.csv"
+    },
+    {
+      "path": "tables/s14_sensitivity_speedup0__runs.csv",
+      "sha256": "3c4b5785dd369feb0fc9ed65114bb84ce28dd14c3246fc2d290e91de77339128",
+      "bytes": 7251,
+      "origin": "06_Results/runs/s14_sensitivity_speedup0/runs.csv"
+    },
+    {
+      "path": "tables/s14_sensitivity_speedup15__runs.csv",
+      "sha256": "2ea3ed123a54fa1d7b7bae5f4218e3fbd50be69610127f49ae009c095ea8411a",
+      "bytes": 7287,
+      "origin": "06_Results/runs/s14_sensitivity_speedup15/runs.csv"
+    },
+    {
+      "path": "tables/s23_controls_feasible__controls.csv",
+      "sha256": "8ec49f082e95ea7779c6a281ce9badfe93c08440beda2f50b82d25ca3b3f44e7",
+      "bytes": 1647,
+      "origin": "06_Results/runs/s23_controls_feasible/controls.csv"
+    },
+    {
+      "path": "tables/s23_controls_feasible__controls.json",
+      "sha256": "589c124f35f426597e79300c557d6f97a1a7d0d79b16a85395261a99276c98de",
+      "bytes": 16103,
+      "origin": "06_Results/runs/s23_controls_feasible/controls.json"
+    },
+    {
+      "path": "tables/sensitivity_layer3.csv",
+      "sha256": "16a1c7f508da2a0f97d5e3f7344ce73d320209ced510ddb34fff5aa7601f3a4f",
+      "bytes": 6023,
+      "origin": "06_Results/runs/s13_sensitivity_layer3/sensitivity_layer3.csv"
+    },
+    {
+      "path": "tables/simulation_analysis.json",
+      "sha256": "f8afaef9b441cf2a45576367c9e679213292f0642fb969c3e06f5e98b04fc56a",
+      "bytes": 4922,
+      "origin": "06_Results/runs/s14_confirmatory_n30/simulation_analysis.json"
+    },
+    {
+      "path": "tables/table3_1_baseline_kpis.csv",
+      "sha256": "fdf31f46c5b0c97e47ede936b89c9a82c1d8d754d66e79ee2e3c5bfc1f53ee20",
+      "bytes": 1655,
+      "origin": "06_Results/runs/s14_table31/table3_1_baseline_kpis.csv"
+    },
+    {
+      "path": "tables/table3_1_baseline_kpis.md",
+      "sha256": "9b5181b134e3e009e7b86d301e527613892013ca4bc0fd9828733c8b97fa6c7e",
+      "bytes": 1479,
+      "origin": "06_Results/runs/s14_table31/table3_1_baseline_kpis.md"
+    },
+    {
+      "path": "tables/tco_sweep.csv",
+      "sha256": "7e905b51a9022b0edc0ceb09b798ede3485d6431532f91f5b99f67b435c84b80",
+      "bytes": 1549,
+      "origin": "06_Results/runs/s13_tco_sweep/tco_sweep.csv"
+    }
+  ],
+  "masters": [
+    {
+      "path": "01_Thesis/Grigorev_Master_Thesis_EN.docx",
+      "sha256": "0a0afed5f72098f7423f3d0e715efe4ce98441e364618e49d0ad038cb294a627",
+      "bytes": 1846879
+    },
+    {
+      "path": "01_Thesis/Grigorev_Master_Thesis_EN.pdf",
+      "sha256": "53068f47ba3eb29ea2f520bf7e256fbf7953436bf9ec1438d8f9e8dd7d17d5e7",
+      "bytes": 2359648
+    },
+    {
+      "path": "01_Thesis/Grigorev_Master_Thesis_RU.docx",
+      "sha256": "64ffb8da54a1d06a1dcd5cf9286163d5b891d670b39cb7bdc353f1af3d5ec7e6",
+      "bytes": 1873525
+    },
+    {
+      "path": "01_Thesis/Grigorev_Master_Thesis_RU.pdf",
+      "sha256": "bd0984b7ad2c340b00f82d6e5a563b3869bb5c1da835f7c0cb541a5507cd4433",
+      "bytes": 2280820
+    },
+    {
+      "path": "02_Defense/Grigorev_Defense_Presentation.pptx",
+      "sha256": "6893bfbbe1b64e621d527017eda82a42eb4455f1f8ca4c0e44d7663a36f7191a",
+      "bytes": 1537285
+    },
+    {
+      "path": "02_Defense/Grigorev_Defense_Speech_and_QA.docx",
+      "sha256": "e87e5c2efe9daf1a1d917ac5179dac662aeb8c427f4fa26e461f555e4b7825e0",
+      "bytes": 27122
+    },
+    {
+      "path": "02_Defense/Grigorev_Defense_Theses_RU_sep2026.docx",
+      "sha256": "a620110731359bcf5b25ddae07d47b8c6cbd571fb10c0f59468c10297bcf9fa5",
+      "bytes": 32842
+    }
+  ],
+  "parameters": [
+    {
+      "name": "baseline_headways",
+      "value": "8 / 15 / 8 / 20",
+      "unit": "min",
+      "geography": "Tashkent, Line 51",
+      "reference_period": "recorded as March 2024",
+      "source": "project record; the GTFS feed is not in the package",
+      "evidence_type": "scenario_assumption",
+      "transformation": "none",
+      "used_by": "Layer 3 baseline, Layer 4 baseline arm"
+    },
+    {
+      "name": "demand_scale",
+      "value": 3.0,
+      "unit": "multiplier",
+      "geography": "corridor",
+      "reference_period": "n/a",
+      "source": "service_config.yaml",
+      "evidence_type": "scenario_assumption",
+      "transformation": "multiplies fused demand",
+      "used_by": "all Layer 3 and Layer 4 results"
+    },
+    {
+      "name": "crowding_model",
+      "value": "ramp, theta 0.80, lambda_full 2.0, linear above phi 1",
+      "unit": "-",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "in-vehicle time multiplier literature (Wardman & Whelan 2011; Tirachini et al. 2013)",
+      "evidence_type": "transfer_from_literature",
+      "transformation": "crowd_min = sum((lambda-1)*L*t), pax-min/day",
+      "used_by": "Layer 3 objective, economics"
+    },
+    {
+      "name": "tco_factor",
+      "value": 1.25,
+      "unit": "multiplier",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "service_config.yaml",
+      "evidence_type": "scenario_assumption",
+      "transformation": "cap on operating-cost index",
+      "used_by": "Layer 3 constraint, cost sweep"
+    },
+    {
+      "name": "equity_delta_default",
+      "value": 0.2,
+      "unit": "-",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "service_config.yaml",
+      "evidence_type": "scenario_assumption",
+      "transformation": "(max-min)/mean headway across periods",
+      "used_by": "Layer 3 constraint, spread sweep"
+    },
+    {
+      "name": "boarding_speedup_18m",
+      "value": 0.3,
+      "unit": "fraction",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "service_config.yaml",
+      "evidence_type": "scenario_assumption",
+      "transformation": "dwell time per pax",
+      "used_by": "Layer 4; sensitivity at 0.0 and 0.15"
+    },
+    {
+      "name": "k_anonymity",
+      "value": 10,
+      "unit": "persons",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "service_config.yaml; architectural default is 20",
+      "evidence_type": "regulatory_rule",
+      "transformation": "suppression of cells",
+      "used_by": "Layer 1; k sweep 5/10/20/50"
+    },
+    {
+      "name": "value_of_time",
+      "value": 27929.97,
+      "unit": "UZS per passenger-hour",
+      "geography": "Tashkent city",
+      "reference_period": "2026 H1",
+      "source": "State Statistics Committee wage series 2.02.02.1200; 12% PIT; 168 h/month; commuting share 0.45",
+      "evidence_type": "published_source + transfer (0.45)",
+      "transformation": "gross -> net -> hourly -> commuting share",
+      "used_by": "economics; +/-30% sensitivity"
+    },
+    {
+      "name": "days_per_year",
+      "value": 250,
+      "unit": "days",
+      "geography": "n/a",
+      "reference_period": "n/a",
+      "source": "assumption",
+      "evidence_type": "scenario_assumption",
+      "transformation": "annualisation",
+      "used_by": "economics"
+    },
+    {
+      "name": "cost_per_veh_km_uzs_12m",
+      "value": null,
+      "unit": "UZS per 12 m-equivalent km",
+      "geography": "Tashkent",
+      "reference_period": "n/a",
+      "source": "not found in sources",
+      "evidence_type": "unknown",
+      "transformation": "none",
+      "used_by": "operator balance (not computed)"
+    },
+    {
+      "name": "fleet",
+      "value": 12,
+      "unit": "vehicles",
+      "geography": "Line 51",
+      "reference_period": "2026",
+      "source": "project record",
+      "evidence_type": "published_source",
+      "transformation": "normative check only",
+      "used_by": "Layer 3 constraint"
+    },
+    {
+      "name": "route_km / one_way_min",
+      "value": "12.8 / 41",
+      "unit": "km / min",
+      "geography": "Line 51",
+      "reference_period": "2026",
+      "source": "project record",
+      "evidence_type": "published_source",
+      "transformation": "segment times by distance",
+      "used_by": "Layer 3, Layer 4"
+    }
+  ],
+  "supplemental_posthoc": {
+    "run_id": "s23_controls_feasible",
+    "purpose": "feasible simple-rule comparison added after the confirmatory series",
+    "evidence_kind": "exploratory",
+    "changes_registered_result": false
+  },
+  "raw_outputs": {
+    "note": "Raw SUMO output of each simulation run stays in its run directory and is not copied here.",
+    "paths": [
+      "06_Results/runs/s14_confirmatory_n30",
+      "06_Results/runs/s14_sensitivity_speedup0",
+      "06_Results/runs/s14_sensitivity_speedup15",
+      "06_Results/runs/s12_K1_technical"
+    ]
+  },
+  "historical": {
+    "note": "Earlier artefacts are kept in place and are not part of this release.",
+    "paths": [
+      "06_Results/tables",
+      "06_Results/figures",
+      "05_Pipeline/route51_service/output",
+      "10_Prototype/exports"
+    ],
+    "explained_in": [
+      "NUMBERS_MAP.md",
+      "05_Pipeline/RESULTS_MAP.md",
+      "06_Results/GENERATOR_OUTPUT.md"
+    ]
+  }
+}

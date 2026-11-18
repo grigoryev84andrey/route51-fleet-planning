@@ -1,0 +1,28 @@
+# Python
+__pycache__/
+*.py[co]
+.pytest_cache/
+.venv/
+venv/
+
+# Console runtime state and exports
+10_Prototype/.work/
+10_Prototype/exports/
+10_Prototype/.session_scenarios_*.json
+
+# Pipeline outputs regenerated locally
+05_Pipeline/route51_service/output/
+05_Pipeline/route51_gen/output/telecom_cdr_raw.*
+*_indexed.parquet
+*.tif
+06_Results/runs/
+routes.rou.xml
+trips_*.xml
+*.rou.alt.xml
+
+# Editor and OS files
+~$*
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

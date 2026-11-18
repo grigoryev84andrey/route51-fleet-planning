@@ -1,0 +1,662 @@
+{
+  "schema_version": 2,
+  "run_id": "s12_layer3_central",
+  "evidence_kind": "model_only",
+  "model_versions": {
+    "schema_version": 2,
+    "crowding_model_version": "ivt_multiplier_v1",
+    "dispatch_version": "dispatch_v1",
+    "numpy": "2.4.6",
+    "pymoo": "0.6.2",
+    "sha256:operations.py": "05f40f9cc538c0b277da446216ae9cdf18b2ac108af89b516f40add5ab1e78fd",
+    "sha256:dispatch.py": "b2166059d079210882845238b783526260819a6268936d38d819f85f6ec90aba",
+    "sha256:optimize.py": "a913674ce7e7a383598688824385537c04b27de3ea1f90b8639802c56610441b"
+  },
+  "fingerprints": {
+    "input": "input:sha256:230f919920fc32ab0596ee2c7de0d5ba973d8ad2883ec036f3d29a6303b33538",
+    "plan_baseline": "plan:sha256:af90a5a09eeb2ec9726289acadbcc37714698931417a719258d1067686dce55e",
+    "plan_candidate": "plan:sha256:9f108bd8e7f06269a022e4156add700923fd858a5f7de42ce0bab959c5991940",
+    "model": "model:sha256:8cc55bed99342a6e4aac0a637043fcf5e00bf82e908202e07a7d96ac3f311ae1"
+  },
+  "parameters": {
+    "demand_scale": 3.0,
+    "budget": 2784.0000000000005,
+    "tco_factor": 1.25,
+    "delta": 0.2,
+    "fleet": 12,
+    "cycle_min": 90,
+    "crowding": {
+      "model": "ramp",
+      "theta": 0.8,
+      "lambda_full": 2.0,
+      "above_capacity": "linear_extension",
+      "segment_times": "distance",
+      "version": "ivt_multiplier_v1"
+    },
+    "seg_min": [
+      2.2567770367196327,
+      1.2483020763274981,
+      1.7669526900266785,
+      3.2024718275731794,
+      2.3895799294995723,
+      0.8001176760609762,
+      2.425362750790425,
+      1.8301701082466504,
+      2.3656125750615096,
+      1.6555570168942737,
+      1.0798711578619538,
+      2.406531139326333,
+      1.6800531057829808,
+      3.1043262682025934,
+      1.4251542071185608,
+      1.6581935948317958,
+      1.6897960998052308,
+      1.2092386130327022,
+      1.656265220885314,
+      1.752201257183228,
+      1.8573184792809054,
+      1.5401471694880062
+    ],
+    "capacity": {
+      "bus_12m": 90,
+      "bus_18m": 150
+    },
+    "relative_cost": {
+      "small": 1.0,
+      "large": 1.5
+    },
+    "nsga2": {
+      "pop": 120,
+      "gen_configured": 300,
+      "gen_used": 300,
+      "seeds": [
+        42,
+        43,
+        44
+      ]
+    },
+    "stop_ids": [
+      "S01",
+      "S02",
+      "S03",
+      "S04",
+      "S05",
+      "S06",
+      "S07",
+      "S08",
+      "S09",
+      "S10",
+      "S11",
+      "S12",
+      "S13",
+      "S14",
+      "S15",
+      "S16",
+      "S17",
+      "S18",
+      "S19",
+      "S20",
+      "S21",
+      "S22",
+      "S23"
+    ]
+  },
+  "baseline": {
+    "headways": [
+      8.0,
+      15.0,
+      8.0,
+      20.0
+    ],
+    "shares": [
+      0.0,
+      0.0,
+      0.0,
+      0.0
+    ],
+    "relaxed_metrics": {
+      "wait": 83901.0,
+      "cost": 2227.2000000000003,
+      "crowd_min": 252035.39272390876,
+      "gen_cost": 335936.39272390876,
+      "ivt_min": 186019.4057939684,
+      "crowded_ivt_share": 0.5704361383214447,
+      "crowded_ivt_share_reason": null,
+      "max_phi": 1.6675008837997465,
+      "over_capacity": true,
+      "over_capacity_segments": 18,
+      "legacy_overcrowd_proxy": 5945.489223970051,
+      "headway_spread": 0.9411764705882353,
+      "lf_spread": 1.5549289780265794,
+      "max_concurrent": 11.25
+    },
+    "dispatch_metrics": {
+      "wait": 83332.6,
+      "cost": 2252.8,
+      "crowd_min": 237329.21536087064,
+      "gen_cost": 320661.8153608707,
+      "ivt_min": 186019.4057939684,
+      "crowded_ivt_share": 0.5704361383214447,
+      "max_phi": 1.6312508645867083,
+      "over_capacity": true,
+      "over_capacity_segments": 17,
+      "effective_headways": {
+        "am_peak": 7.826086956521739,
+        "midday": 15.0,
+        "pm_peak": 7.826086956521739,
+        "off_peak": 20.0
+      },
+      "headway_spread": 0.96137339055794,
+      "fleet_needed": 12,
+      "trips_total": 176,
+      "cohort_trips": {
+        "fwd": 23,
+        "rev": 23
+      },
+      "by_period_direction": [
+        {
+          "period": "am_peak",
+          "direction": "fwd",
+          "trips": 23,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 1.6312508645867083
+        },
+        {
+          "period": "am_peak",
+          "direction": "rev",
+          "trips": 23,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 1.4340819592517942
+        },
+        {
+          "period": "midday",
+          "direction": "fwd",
+          "trips": 24,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 0.13974020726386707
+        },
+        {
+          "period": "midday",
+          "direction": "rev",
+          "trips": 24,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 0.1125719057731672
+        },
+        {
+          "period": "pm_peak",
+          "direction": "fwd",
+          "trips": 23,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 1.3601371449153694
+        },
+        {
+          "period": "pm_peak",
+          "direction": "rev",
+          "trips": 23,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 1.577181830265476
+        },
+        {
+          "period": "off_peak",
+          "direction": "fwd",
+          "trips": 18,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 0.24365821285654832
+        },
+        {
+          "period": "off_peak",
+          "direction": "rev",
+          "trips": 18,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0,
+          "mean_capacity": 90.0,
+          "max_phi": 0.7735762114666507
+        }
+      ],
+      "by_period": {
+        "am_peak": {
+          "wait": 28844.4,
+          "crowd_min": 128965.8228641919,
+          "ivt_min": 75905.50946124695,
+          "cost": 588.8000000000001,
+          "gen_cost": 157810.2228641919
+        },
+        "midday": {
+          "wait": 4994.999999999996,
+          "crowd_min": 0.0,
+          "ivt_min": 7506.835030969853,
+          "cost": 614.4000000000001,
+          "gen_cost": 4994.999999999996
+        },
+        "pm_peak": {
+          "wait": 28823.2,
+          "crowd_min": 108363.39249667875,
+          "ivt_min": 80751.68280912505,
+          "cost": 588.8000000000001,
+          "gen_cost": 137186.59249667876
+        },
+        "off_peak": {
+          "wait": 20670.0,
+          "crowd_min": 0.0,
+          "ivt_min": 21855.378492626573,
+          "cost": 460.8,
+          "gen_cost": 20670.0
+        }
+      },
+      "dispatch_version": "dispatch_v1"
+    },
+    "feasibility": {
+      "feasible": false,
+      "checks": {
+        "cost_within_budget": true,
+        "headway_spread_within_delta": false,
+        "fleet_within_norm": true
+      },
+      "operational_feasibility": "unknown"
+    }
+  },
+  "candidate": {
+    "cid": "43:1",
+    "headways": [
+      10.755351825013069,
+      13.039364203556044,
+      10.679037778270581,
+      13.046547103988988
+    ],
+    "shares": [
+      0.9549148647865189,
+      0.0017486772059007536,
+      0.998828559939246,
+      0.00026812964649130817
+    ],
+    "relaxed_metrics": {
+      "wait": 95840.9046794228,
+      "cost": 2693.884697714884,
+      "crowd_min": 130005.53769143322,
+      "gen_cost": 225846.442370856,
+      "ivt_min": 186019.4057939684,
+      "crowded_ivt_share": 0.49009554720043785,
+      "crowded_ivt_share_reason": null,
+      "max_phi": 1.3697948550355923,
+      "over_capacity": true,
+      "over_capacity_segments": 10,
+      "legacy_overcrowd_proxy": 4437.907137709679,
+      "headway_spread": 0.19928403485163212,
+      "lf_spread": 1.2720510646967336,
+      "max_concurrent": 8.427725593698112
+    },
+    "dispatch_metrics": {
+      "wait": 95608.34608333332,
+      "cost": 2752.0000000000005,
+      "crowd_min": 125299.71674668652,
+      "gen_cost": 220908.06283001986,
+      "ivt_min": 186019.4057939684,
+      "crowded_ivt_share": 0.49009554720043785,
+      "max_phi": 1.3561001163431672,
+      "over_capacity": true,
+      "over_capacity_segments": 10,
+      "effective_headways": {
+        "am_peak": 10.588235294117647,
+        "midday": 12.857142857142858,
+        "pm_peak": 10.588235294117647,
+        "off_peak": 12.413793103448276
+      },
+      "headway_spread": 0.1953958450308816,
+      "fleet_needed": 10,
+      "trips_total": 182,
+      "cohort_trips": {
+        "fwd": 17,
+        "rev": 17
+      },
+      "by_period_direction": [
+        {
+          "period": "am_peak",
+          "direction": "fwd",
+          "trips": 17,
+          "trips_18m": 16,
+          "share_18m_actual": 0.9411764705882353,
+          "share_18m_desired": 0.9549148647865189,
+          "mean_capacity": 146.47058823529412,
+          "max_phi": 1.3561001163431672
+        },
+        {
+          "period": "am_peak",
+          "direction": "rev",
+          "trips": 17,
+          "trips_18m": 16,
+          "share_18m_actual": 0.9411764705882353,
+          "share_18m_desired": 0.9549148647865189,
+          "mean_capacity": 146.47058823529412,
+          "max_phi": 1.1921886167273952
+        },
+        {
+          "period": "midday",
+          "direction": "fwd",
+          "trips": 28,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0017486772059007536,
+          "mean_capacity": 90.0,
+          "max_phi": 0.11977732051188607
+        },
+        {
+          "period": "midday",
+          "direction": "rev",
+          "trips": 28,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.0017486772059007536,
+          "mean_capacity": 90.0,
+          "max_phi": 0.09649020494842903
+        },
+        {
+          "period": "pm_peak",
+          "direction": "fwd",
+          "trips": 17,
+          "trips_18m": 17,
+          "share_18m_actual": 1.0,
+          "share_18m_desired": 0.998828559939246,
+          "mean_capacity": 150.0,
+          "max_phi": 1.104111329401888
+        },
+        {
+          "period": "pm_peak",
+          "direction": "rev",
+          "trips": 17,
+          "trips_18m": 17,
+          "share_18m_actual": 1.0,
+          "share_18m_desired": 0.998828559939246,
+          "mean_capacity": 150.0,
+          "max_phi": 1.2803005445684454
+        },
+        {
+          "period": "off_peak",
+          "direction": "fwd",
+          "trips": 29,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.00026812964649130817,
+          "mean_capacity": 90.0,
+          "max_phi": 0.15123613211785758
+        },
+        {
+          "period": "off_peak",
+          "direction": "rev",
+          "trips": 29,
+          "trips_18m": 0,
+          "share_18m_actual": 0.0,
+          "share_18m_desired": 0.00026812964649130817,
+          "mean_capacity": 90.0,
+          "max_phi": 0.48015075194481766
+        }
+      ],
+      "by_period": {
+        "am_peak": {
+          "wait": 39062.81316666667,
+          "crowd_min": 72819.18500002395,
+          "ivt_min": 75905.50946124695,
+          "cost": 640.0000000000001,
+          "gen_cost": 111881.99816669061
+        },
+        "midday": {
+          "wait": 4310.0883749999975,
+          "crowd_min": 0.0,
+          "ivt_min": 7506.835030969853,
+          "cost": 716.8000000000001,
+          "gen_cost": 4310.0883749999975
+        },
+        "pm_peak": {
+          "wait": 38587.90944444444,
+          "crowd_min": 52480.53174666258,
+          "ivt_min": 80751.68280912505,
+          "cost": 652.8000000000001,
+          "gen_cost": 91068.44119110702
+        },
+        "off_peak": {
+          "wait": 13647.535097222222,
+          "crowd_min": 0.0,
+          "ivt_min": 21855.378492626573,
+          "cost": 742.4000000000001,
+          "gen_cost": 13647.535097222222
+        }
+      },
+      "dispatch_version": "dispatch_v1"
+    },
+    "feasibility": {
+      "feasible": true,
+      "checks": {
+        "cost_within_budget": true,
+        "headway_spread_within_delta": true,
+        "fleet_within_norm": true
+      },
+      "operational_feasibility": "unknown"
+    }
+  },
+  "selection": {
+    "rule": "min wait + crowd_min; ties: cost, then stable id",
+    "pool_size": 360,
+    "examined": [
+      {
+        "cid": "44:2",
+        "relaxed_gen_cost": 215976.73309019764,
+        "dispatch_gen_cost": 207301.95650879623,
+        "dispatch_cost": 2816.0000000000005,
+        "feasible": false,
+        "cost_within_budget": false,
+        "headway_spread_within_delta": false,
+        "fleet_within_norm": true
+      },
+      {
+        "cid": "42:2",
+        "relaxed_gen_cost": 217919.05261128306,
+        "dispatch_gen_cost": 205369.78043293205,
+        "dispatch_cost": 2867.2000000000003,
+        "feasible": false,
+        "cost_within_budget": false,
+        "headway_spread_within_delta": false,
+        "fleet_within_norm": true
+      },
+      {
+        "cid": "42:94",
+        "relaxed_gen_cost": 219919.95436011674,
+        "dispatch_gen_cost": 205385.22846070983,
+        "dispatch_cost": 2828.8,
+        "feasible": false,
+        "cost_within_budget": false,
+        "headway_spread_within_delta": false,
+        "fleet_within_norm": true
+      },
+      {
+        "cid": "44:81",
+        "relaxed_gen_cost": 224813.52660623105,
+        "dispatch_gen_cost": 216783.18117972763,
+        "dispatch_cost": 2790.4,
+        "feasible": false,
+        "cost_within_budget": false,
+        "headway_spread_within_delta": false,
+        "fleet_within_norm": true
+      },
+      {
+        "cid": "43:1",
+        "relaxed_gen_cost": 225846.442370856,
+        "dispatch_gen_cost": 220908.06283001986,
+        "dispatch_cost": 2752.0000000000005,
+        "feasible": true,
+        "cost_within_budget": true,
+        "headway_spread_within_delta": true,
+        "fleet_within_norm": true
+      }
+    ],
+    "per_seed_best": {
+      "42": {
+        "cid": "42:2",
+        "gen_cost": 217919.05261128306,
+        "wait": 94394.28149840795,
+        "cost": 2781.6967205090677,
+        "crowd_min": 123524.77111287511,
+        "headways": [
+          10.5434467572669,
+          12.834310358188027,
+          10.676135498677516,
+          12.467718385042117
+        ],
+        "shares": [
+          0.967063731286158,
+          0.0415718512699233,
+          0.9987460929801376,
+          0.03781521020259473
+        ]
+      },
+      "43": {
+        "cid": "43:1",
+        "gen_cost": 225846.442370856,
+        "wait": 95840.9046794228,
+        "cost": 2693.884697714884,
+        "crowd_min": 130005.53769143322,
+        "headways": [
+          10.755351825013069,
+          13.039364203556044,
+          10.679037778270581,
+          13.046547103988988
+        ],
+        "shares": [
+          0.9549148647865189,
+          0.0017486772059007536,
+          0.998828559939246,
+          0.00026812964649130817
+        ]
+      },
+      "44": {
+        "cid": "44:2",
+        "gen_cost": 215976.73309019764,
+        "wait": 94211.54403728835,
+        "cost": 2762.6979547679016,
+        "crowd_min": 121765.18905290929,
+        "headways": [
+          10.703421540082113,
+          12.543089039128764,
+          10.421489374943464,
+          12.72145798225112
+        ],
+        "shares": [
+          0.9690544857540421,
+          0.0008761526209640901,
+          0.999805605861678,
+          0.002396574593043975
+        ]
+      }
+    }
+  },
+  "convergence": {
+    "reference_point": [
+      285265.02688625216,
+      3062.284834708516,
+      2613413.43739354
+    ],
+    "per_seed": {
+      "42": {
+        "defined": true,
+        "stabilised": true,
+        "rel_gain": 0.005517289871644006,
+        "from_generation": 240,
+        "reason": null
+      },
+      "43": {
+        "defined": true,
+        "stabilised": true,
+        "rel_gain": -0.010699588800219196,
+        "from_generation": 240,
+        "reason": null
+      },
+      "44": {
+        "defined": true,
+        "stabilised": true,
+        "rel_gain": 0.0031719170470921225,
+        "from_generation": 240,
+        "reason": null
+      }
+    },
+    "first_attempt_if_repeated": null,
+    "optimizer_seconds": 29.41923451423645
+  },
+  "operational_feasibility": "unknown",
+  "legacy_control": {
+    "definition": "wait + 10 * legacy_overcrowd_proxy (historical); not comparable with crowd_min",
+    "baseline": 143355.8922397005,
+    "candidate": 140219.9760565196
+  },
+  "model_resampling_comparison": {
+    "kpi": "gen_cost = wait + crowd_min",
+    "unit": "pax_min_per_day",
+    "evidence_kind": "exploratory",
+    "n": 60,
+    "seed": 7,
+    "baseline_kpi_mean": 334914.24438810284,
+    "optimized_kpi_mean": 225271.88958150594,
+    "mean_improvement": 109642.35480659695,
+    "improvement_pct": 32.73744149249801,
+    "t_stat": 249.76070798450388,
+    "p_value": 6.151375282656776e-91,
+    "cohens_d_paired": 32.24396875203191
+  },
+  "headway_spread_frontier": [
+    {
+      "delta": 0.1,
+      "feasible": true,
+      "gen_cost": 257388.80881250172,
+      "wait": 99307.857833028,
+      "cost": 2764.915810254414,
+      "crowd_min": 158080.9509794737,
+      "n_pareto": 120
+    },
+    {
+      "delta": 0.2,
+      "feasible": true,
+      "gen_cost": 217919.05261128306,
+      "wait": 94394.28149840795,
+      "cost": 2781.6967205090677,
+      "crowd_min": 123524.77111287511,
+      "n_pareto": 120
+    },
+    {
+      "delta": 0.3,
+      "feasible": true,
+      "gen_cost": 198796.71665338517,
+      "wait": 89703.49189974644,
+      "cost": 2769.3687069694297,
+      "crowd_min": 109093.22475363873,
+      "n_pareto": 120
+    },
+    {
+      "delta": 999,
+      "feasible": true,
+      "gen_cost": 93327.27498245548,
+      "wait": 80346.4984782679,
+      "cost": 2733.632169024701,
+      "crowd_min": 12980.776504187586,
+      "n_pareto": 120
+    }
+  ]
+}

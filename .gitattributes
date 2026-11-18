@@ -1,0 +1,2 @@
+# Keep files byte-identical to the release manifest (SHA-256 checks).
+* -text

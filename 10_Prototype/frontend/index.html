@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Route 51 — Fleet planning (synthetic model)</title>
+<link rel="stylesheet" href="fonts.css">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="header">
+  <div class="brand">
+    <div class="name">ROUTE 51</div>
+    <div class="sub">Fleet planning · synthetic model</div>
+  </div>
+  <nav class="stepper" aria-label="Steps">
+    <ol>
+      <li><button type="button" data-step="1" id="nav-1">1 · Conditions</button></li>
+      <li><button type="button" data-step="2" id="nav-2">2 · Compare plans</button></li>
+      <li><button type="button" data-step="3" id="nav-3">3 · Validate &amp; export</button></li>
+    </ol>
+  </nav>
+  <button type="button" class="btn btn-ghost" id="btn-glossary" aria-haspopup="dialog">Terms used</button>
+</header>
+
+<div class="banner" id="banner" role="alert" hidden>
+  <p id="banner-text"></p>
+  <div class="banner-actions">
+    <button type="button" class="btn btn-secondary" id="banner-retry" hidden>Retry calculation</button>
+    <button type="button" class="btn btn-ghost" id="banner-close">Dismiss</button>
+  </div>
+</div>
+
+<section class="progress" id="progress" aria-live="polite" hidden>
+  <div class="progress-head">
+    <strong id="progress-stage">Working…</strong>
+    <button type="button" class="btn btn-ghost" id="progress-hide">Hide progress</button>
+  </div>
+  <div class="bar" id="progress-bar-wrap"><div class="bar-fill" id="progress-bar"></div></div>
+  <p class="muted" id="progress-note"></p>
+  <p class="muted small">Hiding the panel does not stop the calculation; it continues on the server.</p>
+</section>
+<button type="button" class="btn btn-ghost progress-show" id="progress-show" hidden>Show progress</button>
+
+<main id="main" tabindex="-1">
+
+<!-- STEP 1 ─────────────────────────────────────────────────────────────── -->
+<section class="step" id="step-1" aria-labelledby="h-step-1">
+  <h1 id="h-step-1">Conditions</h1>
+  <p class="lead">Route 51 (<span id="corridor-line">23 stops</span>) is the only corridor in this
+    version. All data are synthetic. <span id="import-note"></span>.</p>
+
+  <fieldset class="choice">
+    <legend>Start from</legend>
+    <label class="card-radio"><input type="radio" name="entry" value="thesis" checked>
+      <span><strong>Open thesis example</strong><br>
+      <span class="muted">The frozen synthetic demand matrix used in the thesis.</span>
+      <span class="muted" id="example-status"></span></span></label>
+    <label class="card-radio"><input type="radio" name="entry" value="generate">
+      <span><strong>Create a scenario</strong><br>
+      <span class="muted">Generate new synthetic feeds and estimate demand from them.</span></span></label>
+  </fieldset>
+
+  <div class="grid-form">
+    <div class="field" id="field-preset" hidden>
+      <label for="in-preset">Synthetic data condition</label>
+      <select id="in-preset"></select>
+      <p class="muted small" id="preset-line"></p>
+    </div>
+    <div class="field">
+      <label for="in-scale">Demand scale (assumption)</label>
+      <select id="in-scale"></select>
+      <p class="muted small">Multiplies the estimated demand; ×3 is the thesis scenario.</p>
+    </div>
+    <div class="field">
+      <label for="in-budget">Maximum operating-cost increase</label>
+      <select id="in-budget"></select>
+      <p class="muted small">Relative to the current timetable's operating-cost index.</p>
+    </div>
+    <div class="field">
+      <label for="in-delta">Maximum headway spread across periods</label>
+      <select id="in-delta"></select>
+      <p class="muted small">(longest − shortest headway) / mean headway. Not a measure of spatial equity.</p>
+    </div>
+  </div>
+
+  <details class="advanced">
+    <summary>Advanced settings</summary>
+    <div class="grid-form">
+      <div class="field">
+        <label for="in-seed">Random seed for generated data</label>
+        <input id="in-seed" type="number" min="0" step="1" value="42" inputmode="numeric">
+      </div>
+      <div class="field"><span class="label">Optimiser</span><p id="algo-line" class="muted"></p></div>
+      <div class="field"><span class="label">Crowding model</span><p id="crowd-line" class="muted"></p></div>
+    </div>
+  </details>
+
+  <div class="actions">
+    <button type="button" class="btn btn-primary" id="btn-step1"></button>
+    <span class="muted" id="step1-hint" aria-live="polite"></span>
+  </div>
+
+  <section class="card" id="data-card" hidden aria-labelledby="h-data">
+    <h2 id="h-data">Demand estimate</h2>
+    <dl class="kv" id="data-kv"></dl>
+    <p class="muted small" id="data-note"></p>
+  </section>
+</section>
+
+<!-- STEP 2 ─────────────────────────────────────────────────────────────── -->
+<section class="step" id="step-2" aria-labelledby="h-step-2" hidden>
+  <h1 id="h-step-2">Compare plans</h1>
+  <p class="lead" id="compare-lead"></p>
+  <p class="stale-note" id="compare-stale" hidden>These plans were calculated for earlier conditions.
+    Recalculate plans to compare under the current conditions.</p>
+  <div class="table-scroll">
+    <table class="compare" id="compare-table"></table>
+  </div>
+  <p class="muted small">Recommended for the selected priorities: the plan with the lowest
+    <em>waiting + crowding disutility</em> among plans that stay within the limits after rounding to
+    whole trips. Changes are shown against the current timetable; higher waiting is a worsening.</p>
+
+  <h2>Selected plan by period</h2>
+  <div class="table-scroll"><table id="plan-table"></table></div>
+
+  <details class="advanced" id="all-plans">
+    <summary>All calculated plans</summary>
+    <p class="muted small" id="pareto-description">Explore the Pareto front: select a point to inspect its plan.
+      Waiting and crowding are better towards the bottom left; larger points mean higher operating cost.
+      This is a two-dimensional view of three objectives, before rounding to whole trips.</p>
+    <div class="pareto-panel">
+      <div class="pareto-heading"><h2>Pareto front</h2><span class="muted small" id="pareto-count"></span></div>
+      <div class="pareto-scroll"><svg id="pareto-chart" viewBox="0 0 940 510" role="group"
+        aria-label="Calculated plans: waiting versus crowding disutility" aria-describedby="pareto-description"></svg></div>
+      <div class="pareto-legend" id="pareto-legend"></div>
+      <div class="field pareto-picker"><label for="pareto-plan">Inspect plan</label><select id="pareto-plan"></select></div>
+      <section class="pareto-detail" aria-labelledby="pareto-detail-title" aria-live="polite">
+        <h3 id="pareto-detail-title"></h3>
+        <p class="muted small">Relaxed model, before rounding to whole trips. Inspecting a point does not change the plan selected for validation above.</p>
+        <dl class="kv" id="pareto-metrics"></dl>
+      </section>
+    </div>
+  </details>
+
+  <div class="actions">
+    <button type="button" class="btn btn-secondary" id="btn-back-1">Back to conditions</button>
+    <button type="button" class="btn btn-primary" id="btn-step2">Continue to validation</button>
+  </div>
+</section>
+
+<!-- STEP 3 ─────────────────────────────────────────────────────────────── -->
+<section class="step" id="step-3" aria-labelledby="h-step-3" hidden>
+  <h1 id="h-step-3">Validate &amp; export</h1>
+  <p class="lead" id="validate-lead"></p>
+
+  <section class="card" aria-labelledby="h-model">
+    <h2 id="h-model">Model result</h2>
+    <p class="muted small">Operations model on the executable timetable; not a simulation.</p>
+    <dl class="kv" id="model-kv"></dl>
+    <p class="status-tag" id="fleet-tag"></p>
+  </section>
+
+  <section class="card" aria-labelledby="h-sim">
+    <h2 id="h-sim">Simulation</h2>
+    <p class="status-tag" id="sim-status" role="status"></p>
+    <div id="sim-body"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-eco">
+    <h2 id="h-eco">Economics</h2>
+    <fieldset class="inline">
+      <legend class="small">Weight of waiting time</legend>
+      <label><input type="radio" name="ww" value="1" checked> 1× in-vehicle time</label>
+      <label><input type="radio" name="ww" value="2"> 2×</label>
+    </fieldset>
+    <div class="eco-grid" id="eco"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-holds">
+    <h2 id="h-holds">Re-optimise for each scenario</h2>
+    <p class="muted small">Re-runs the optimiser for each cost limit and each headway-spread limit.
+      Each point may choose a different plan; this is not a robustness test of one fixed plan.</p>
+    <button type="button" class="btn btn-secondary" id="btn-holds">Re-optimise for each scenario</button>
+    <div id="holds"></div>
+  </section>
+
+  <section class="card" aria-labelledby="h-export">
+    <h2 id="h-export">Report</h2>
+    <p class="status-tag" id="export-status"></p>
+    <p class="muted small">Preview the complete report before downloading. Improved model measures, positive passenger benefits and key economics figures are shown in bold.</p>
+    <div class="report-actions">
+      <button type="button" class="btn btn-secondary" id="btn-export">Preview report</button>
+      <button type="button" class="btn btn-secondary" id="btn-keep">Keep this plan in the list</button>
+    </div>
+    <div id="report-preview" hidden>
+      <h3 id="report-preview-title" tabindex="-1">Report preview</h3>
+      <iframe id="report-frame" title="Complete planning report" sandbox="" referrerpolicy="no-referrer"></iframe>
+    </div>
+    <div id="export-links"></div>
+    <ul id="kept" class="muted small"></ul>
+  </section>
+
+  <div class="actions">
+    <button type="button" class="btn btn-secondary" id="btn-back-2">Back to plans</button>
+    <button type="button" class="btn btn-primary" id="btn-simulate">Run full simulation</button>
+  </div>
+</section>
+</main>
+
+<dialog id="glossary" aria-labelledby="h-gloss">
+  <h2 id="h-gloss">Terms used</h2>
+  <dl id="gloss-list"></dl>
+  <button type="button" class="btn btn-secondary" id="gloss-close">Close</button>
+</dialog>
+
+<script src="app.js"></script>
+</body>
+</html>

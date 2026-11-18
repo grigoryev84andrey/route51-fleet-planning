@@ -1,0 +1,4 @@
+reference_area,n_districts,population,population_within_500m,coverage_pct,basis
+corridor districts,7,1888800.0,110592.0,5.86,"official district totals, raster-weighted within district"
+Tashkent city (12 districts),12,2956300.0,110592.0,3.74,"official district totals, raster-weighted within district"
+corridor band (1 km of the alignment),7,235795.0,107089.0,45.42,register-corrected raster within 1 km of the route polyline

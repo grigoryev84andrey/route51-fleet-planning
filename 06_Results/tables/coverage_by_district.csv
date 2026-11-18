@@ -1,0 +1,13 @@
+district,population_official,population_raster,raster_over_official,share_within_500m,population_within_500m,coverage_pct,on_corridor,area_km2
+Bektemir Tumani,55700.0,451669.8,8.11,0.0,0.0,0.0,False,35.7
+Chilonzor Tumani,271900.0,74599.0,0.27,0.03696,10050.0,3.7,True,30.3
+Mirobod Tumani,150100.0,44753.0,0.3,0.06146,9226.0,6.15,True,16.7
+Mirzo Ulug‘bek Tumani,323100.0,89572.3,0.28,0.00811,2621.0,0.81,True,38.7
+Olmazor Tumani,395000.0,83931.7,0.21,0.0,0.0,0.0,False,33.7
+Sergeli tumani,162300.0,667002.4,4.11,0.0,0.0,0.0,False,51.5
+Shayhontohur Tumani,360500.0,71275.9,0.2,0.01348,4858.0,1.35,True,26.9
+Uchtepa Tumani,293500.0,71825.2,0.24,0.0,0.0,0.0,False,28.2
+Yakkasaroy Tumani,126900.0,37807.9,0.3,0.03634,4611.0,3.63,True,14.1
+Yangi hayot Tumani,161000.0,846085.4,5.26,0.0,0.0,0.0,False,42.2
+Yashnobod Tumani,289400.0,131851.5,0.46,0.00126,364.0,0.13,True,78.2
+Yunusobod Tumani,366900.0,96245.8,0.26,0.21494,78862.0,21.49,True,41.4

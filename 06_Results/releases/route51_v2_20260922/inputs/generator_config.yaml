@@ -1,0 +1,255 @@
+# =====================================================================
+# Route-51 Synthetic Multi-Feed Generator — configuration
+# =====================================================================
+# Calibration provenance tags:
+#   [D1]  D1_UZ_operator_market_shares      (telecom / phone ownership)
+#   [D2]  D2_ATTO_operation_Tashkent        (fare system, tap-in only)
+#   [D10] D10_Tashkent_demography_zoning    (demand: production + attraction)
+#   PLACEHOLDER = NOT a measured value; must be replaced with stat.uz /
+#                 data.egov.uz / operator data before any empirical claim.
+#
+# RULE (inherited from v2 spec): the code runs with placeholders but emits a
+# load-time warning listing every PLACEHOLDER still in use. Operator shares,
+# penetration, card-type splits and trip rates are SENSITIVITY PARAMETERS,
+# not constants — sweep them, report a band, never a single point estimate.
+# =====================================================================
+
+run:
+  random_seed: 42
+  output_dir: output
+  data_dir: data
+
+# ---------------------------------------------------------------------
+# STUDY AREA — Route 51 corridor (Yunusabad Block 6 <-> Beshagach Sq.)
+# ---------------------------------------------------------------------
+study_area:
+  stops_csv: Busstations.csv        # canonical 23 stops S01..S23 (sep=';')
+  canonical_direction: S23_to_S01   # [D10] Yunusabad -> Beshagach (memory-canonical)
+  catchment_buffer_m: 500           # buffer around the route polyline -> internal H3 cells
+  h3_resolution: 9                  # h3-py avg edge ~201 m, cell ~0.105 km^2 (Uber docs quote ~174 m edge); bus-stop granularity. README: finer res -> heavier k-anon suppression
+  h3_resolution_macro: 7            # ~1.4 km edge, district-level reporting only
+
+  # Cordon (external) zones: aggregate "rest of Tashkent" where out-of-catchment
+  # work/secondary anchors land. Prevents a closed-system OD that under-counts outflow.
+  # Two MUST be tagged as metro-interchange gateways. [D10 Table 2]
+  cordon_zones:
+    - {id: Z_PAKHTAKOR, kind: metro_gateway, lat: 41.3178, lon: 69.2552, note: "central interchange, high transfer load"}
+    - {id: Z_NOVZA,     kind: metro_gateway, lat: 41.2913, lon: 69.2230, note: "Chilanzar SW, residential area (off-corridor reference)"}
+    - {id: Z_NW,  kind: aggregate, note: "Almazar / NW residential mass"}
+    - {id: Z_E,   kind: aggregate, note: "Yashnabad industrial / E"}
+    - {id: Z_S,   kind: aggregate, note: "Sergeli / Yangihayot S growth"}
+    - {id: Z_REST, kind: aggregate, note: "residual city"}
+
+# ---------------------------------------------------------------------
+# PRODUCTION (home) layer — district control totals [D10 Table 1, mid-2024]
+# Downscaling district pop -> H3 is the LOAD-BEARING step [D10 6.1] and needs
+# OSM landuse=residential / building footprints (NOT YET AVAILABLE).
+# Until then, home placement uses a PLACEHOLDER density (see population.home_density_model).
+# ---------------------------------------------------------------------
+districts_population_000:    # permanent (propiska) residents; registered != daytime [D10 6.2]
+  Almazar: 395.0
+  Yunusabad: 366.9          # Route-51 home end (Block 6)
+  Shaykhantakhur: 360.5     # central-west; Pakhtakor node, attraction end
+  Mirzo_Ulugbek: 323.1      # universities + IT Park
+  Uchtepa: 293.5
+  Yashnabad: 289.4
+  Chilanzar: 271.9          # Chilanzar catchment
+  Sergeli: 162.3
+  Yangihayot: 161.0
+  Mirabad: 150.1
+  Yakkasaray: 126.9
+  Bektemir: 55.7
+city_total_000: 2999.5      # mid-2024; ~3145.2 at start of 2025
+
+# ---------------------------------------------------------------------
+# ATTRACTION layer — seed anchors with real coordinates [D10 Table 3].
+# Weights are PLACEHOLDER; real weights come from OSM POI density per H3
+# (offices/shops/schools/universities/marketplaces) [D10 5, 6.4].
+# ---------------------------------------------------------------------
+attraction_anchors:
+  - {id: A_TASHKENT_CITY, class: work_retail, lat: 41.3161, lon: 69.2485, weight: 1.00}   # PLACEHOLDER weight
+  - {id: A_IT_PARK,       class: work,        lat: 41.341,  lon: 69.287,  weight: 0.70}   # PLACEHOLDER
+  - {id: A_NUUZ,          class: education,   lat: 41.3504, lon: 69.2057, weight: 0.60}   # PLACEHOLDER
+  - {id: A_TUIT,          class: education,   lat: 41.3409, lon: 69.2867, weight: 0.55}   # PLACEHOLDER
+  - {id: A_CHORSU,        class: retail,      lat: 41.3267, lon: 69.2350, weight: 0.50}   # PLACEHOLDER
+  - {id: A_OLOY,          class: retail,      lat: 41.3194, lon: 69.2853, weight: 0.45}   # PLACEHOLDER
+  - {id: A_SAMARQAND_D,   class: retail,      lat: 41.3165, lon: 69.2313, weight: 0.40}   # PLACEHOLDER
+  - {id: A_MEGAPLANET,    class: retail,      lat: 41.3673, lon: 69.2910, weight: 0.35}   # PLACEHOLDER
+
+# ---------------------------------------------------------------------
+# POPULATION (single operator's observed subscribers in the catchment)
+# N = round(catchment_population * operator_market_share)  [v2 Step 1]
+# ---------------------------------------------------------------------
+population:
+  # Derivation inputs (override N directly only for quick tests).
+  catchment_population: 80000        # PLACEHOLDER until district downscale onto corridor cells
+  unique_user_basis: true            # base persons on UNIQUE subscribers, not SIMs [D1 5.2]
+  n_override: null
+
+  home_density_model: uniform_corridor   # PLACEHOLDER: {uniform_corridor | position_gradient}
+                                         # real model = dasymetric on OSM landuse [D10 6.1] — pending
+
+  demographics:                        # all marginals PLACEHOLDER (replace w/ stat.uz tuman marginals)
+    age_band:        {child_0_14: 0.27, youth_15_24: 0.17, adult_25_44: 0.32, adult_45_64: 0.17, senior_65p: 0.07}
+    gender:          {f: 0.51, m: 0.49}     # [D10] city 1.4717M m / 1.5278M w
+    employment:      {employed: 0.58, student: 0.15, other: 0.27}   # PLACEHOLDER
+    income_proxy:    {low: 0.40, mid: 0.45, high: 0.15}             # PLACEHOLDER
+    car_ownership:   {"yes": 0.35, "no": 0.65}                      # PLACEHOLDER
+    household_has_children: {"yes": 0.45, "no": 0.55}               # PLACEHOLDER
+    work_schedule_type: {fixed: 0.62, shift: 0.20, flexible: 0.18}  # PLACEHOLDER; shift RETAINED to stress day/night anchor heuristic
+
+# ---------------------------------------------------------------------
+# DEMAND MODEL (Stage 2 activities) — all values PLACEHOLDER
+# ---------------------------------------------------------------------
+demand:
+  travel_speed_kmh: 20.0             # PLACEHOLDER door-to-door avg for time proxy
+  walk_access_m: 400                 # PLACEHOLDER max walk to a stop -> bus-accessible end
+  gravity:
+    attraction_exponent: 1.0         # PLACEHOLDER alpha in W^alpha
+    distance_decay_per_km: 0.15      # PLACEHOLDER beta in exp(-beta*km)
+  mode_split:
+    p_bus_base: 0.50                 # PLACEHOLDER bus prob when both ends accessible
+    car_owner_factor: 0.40           # PLACEHOLDER multiplier if car-owning household
+  secondary_trip_prob: 0.35          # PLACEHOLDER chance of a shop stop after primary
+  discretionary_trip_prob: 0.50      # PLACEHOLDER chance an 'other' person makes a trip at all
+  departure_windows_min:             # PLACEHOLDER [start,end] minutes from midnight, to primary
+    fixed:    [420, 540]             # 07:00-09:00
+    shift:    [300, 1320]            # 05:00-22:00 spread
+    flexible: [480, 600]             # 08:00-10:00
+  return_window_min: [960, 1140]     # 16:00-19:00 PM return
+  secondary_window_min: [1110, 1260] # 18:30-21:00 evening shop
+  external_sink:                     # representative 'rest of city' destination (NOT bus-accessible)
+    lat: 41.3110
+    lon: 69.2800
+    weight: 1.50                     # PLACEHOLDER pull of city-wide jobs/errands
+
+# ---------------------------------------------------------------------
+# TELECOM / phone-ownership skew  [D1]
+# ---------------------------------------------------------------------
+telecom:
+  # (a) PENETRATION — not everyone owns/uses a phone; ~73% unique-user nationally (stat.uz 2022, DATED).
+  penetration:
+    base_rate: 0.733                 # [D1 Table 0] unique-user provision, Jan-Sep 2022 (dated)
+    couple_to_demographics: true     # lower for very young / senior / low income [D1 5.1]
+    multiplier_by_age:    {child_0_14: 0.30, youth_15_24: 1.05, adult_25_44: 1.10, adult_45_64: 1.00, senior_65p: 0.70}  # PLACEHOLDER
+    multiplier_by_income: {low: 0.85, mid: 1.05, high: 1.10}        # PLACEHOLDER
+
+  # (b) OPERATOR SAMPLING — if real CDR comes from ONE operator, traces are NOT a population sample.
+  # Central weights + bands [D1 Table 3]. SENSITIVITY PARAMETER — run band endpoints + both leadership camps.
+  operator_shares:                   # as-of 2024-2025; Mobiuz privatisation is a forward shock
+    Ucell:    {central: 0.25, band: [0.21, 0.27]}
+    Uzmobile: {central: 0.25, band: [0.22, 0.30]}   # Tashkent prior: widen DOWNWARD (urban skews off CDMA) [D1 6]
+    Beeline:  {central: 0.23, band: [0.20, 0.25]}   # urban / high-ARPU / younger skew [D1 5.1]
+    Mobiuz:   {central: 0.22, band: [0.20, 0.23]}
+    MVNO:     {central: 0.05, band: [0.03, 0.06]}
+  observed_operator: Beeline         # which single operator's feed we emulate (selection bias source)
+  operator_demographic_skew:         # P(subscribes to observed_operator | demo) shape [D1 5.1] — PLACEHOLDER
+    Beeline: {age: {youth_15_24: 1.3, adult_25_44: 1.2, senior_65p: 0.6}, income: {high: 1.4, low: 0.7}, urban: 1.2}
+
+  # (c) MULTI-SIM — ~1 in 4-5 SIMs is secondary [D1 5.2]; if keyed by SIM -> phantom co-location.
+  multi_sim:
+    enabled: false                   # baseline keys by PERSON (clean); enable to inject SIM-keyed artefacts
+    secondary_sim_rate: 0.22         # PLACEHOLDER share of persons with a 2nd line
+
+  signalling:                        # event model is STATE-DEPENDENT [v2 issue 2]
+    event_types: [LAU, HO, TA]
+    base_rate_stay_per_hr: 2.0       # PLACEHOLDER keep-alive during stays
+    base_rate_travel_per_hr: 12.0    # PLACEHOLDER denser during travel legs
+    boundary_crossing_boost: true    # emit LAU/HO preferentially at H3-cell crossings
+    usage_intensity_multiplier: {light: 0.5, medium: 1.0, heavy: 2.0}   # PLACEHOLDER; per-person MULTIPLIER not the rate
+    couple_usage_to_demographics: true   # [v2 issue 5] run both, report contrast
+
+# ---------------------------------------------------------------------
+# ATTO fare feed (bus, Route 51 only) — TAP-IN ONLY, NO ALIGHTING  [D2]
+# ATTO = payment-system operator; carrier = Toshshahartrans (TSTX). DO NOT CONFLATE. [D2 1]
+# Data window: 2025-2026 flat-fare, pre-distance-fare (2027 metro decree out of scope). [D2 6.2]
+# ---------------------------------------------------------------------
+atto:
+  fare_uzs: 1700                     # [D2] flat per boarding; some sources cite 3000 — VERIFY before locking
+  fare_uzs_alt: 3000
+  rider_id: account_level            # request account-level (not token-level) hashed IDs [D2 6.3]
+  card_types:                        # 4 types [D2 1]; shares PLACEHOLDER (rough-seeded from demography)
+    blue_general:  {discount: 0.00, share: 0.55}   # PLACEHOLDER
+    green_pupil:   {discount: 0.50, share: 0.12}    # PLACEHOLDER ~ school-age
+    yellow_student: {discount: 0.50, share: 0.13}   # PLACEHOLDER ~ uni students
+    red_social:    {discount: 0.50, share: 0.20}    # PLACEHOLDER ~ pensioners/disabled
+  transaction_not_journey: true      # bus transfers = separate taps -> overcount journeys; normalise before OD [D2 4]
+
+# ---------------------------------------------------------------------
+# BUS GPS feed — timetable-driven along Route-51 polyline (TSTX telemetry proxy)
+# (Feed-3 module pending confirmation that the generator owns GPS; SUMO = eval only.)
+# ---------------------------------------------------------------------
+bus_gps:
+  day_type: weekday                  # {weekday | weekend}
+  base_date: "2025-06-16"            # a Monday; timestamps anchor to this date
+  direction_outbound: S23_to_S01     # [user] Yunusabad Block 6 -> Beshagach Sq. (canonical)
+  service_start: "05:15"             # [user]
+  service_end: "23:10"               # [user]
+  one_way_min: 41.0                  # [user] used to derive cruise speed (exact)
+  route_km: 12.8                     # [user] corrects earlier 13.9; straight-line polyline ~11.9 (circuity)
+  fleet_weekday: 12                  # [user]
+  fleet_weekend: 10                  # [user]
+  first_departure_weekday: "05:35"   # [user]
+  last_departure_weekday: "22:00"    # [user]
+  headway_peak_min: [8, 10]          # [user] peak interval; scheduler uses the midpoint (9)
+  headway_offpeak_min: 20            # PLACEHOLDER (calibrate)
+  peak_windows: [["07:00", "10:00"], ["16:00", "19:00"]]   # PLACEHOLDER boundaries
+  layover_min: 4                     # PLACEHOLDER terminal layover
+  dwell_s: 20                        # PLACEHOLDER per-stop dwell; cruise speed derived to hit one_way_min
+  ping_interval_s: 30                # export every 30 s
+  vehicle_types:                     # capacities/shares PLACEHOLDER
+    bus_12m: {capacity: 90,  share: 0.70}
+    bus_18m: {capacity: 150, share: 0.30}
+  occupancy_model: placeholder_profile   # PLACEHOLDER load curve; NOT demand-linked until Stage 1-2
+
+# ---------------------------------------------------------------------
+# TIME BINS — calibration choices, all explicit [v2 issue 10]
+# ---------------------------------------------------------------------
+time_bins:
+  night_hours:   [0, 5]              # PLACEHOLDER — used by home detection
+  working_hours: [9, 17]             # PLACEHOLDER — used by work detection
+  bins:                              # PLACEHOLDER boundaries
+    am_peak:  [7, 10]
+    midday:   [10, 16]
+    pm_peak:  [16, 19]
+    off_peak: [19, 24]
+
+# ---------------------------------------------------------------------
+# PRIVACY — k-anonymity required; DP optional/disabled [v2 Step 5]
+# ---------------------------------------------------------------------
+privacy:
+  k_anonymity: 10                    # suppress OD cells / hourly presence < k
+  differential_privacy: {enabled: false, epsilon: 1.0}
+
+# ---------------------------------------------------------------------
+# EXPANSION — demographic-segmented; applied AFTER suppression (report bias) [v2 Step 6]
+# ---------------------------------------------------------------------
+expansion:
+  segmented: true                    # EXPANSION_FACTOR[seg] = 1 / operator_share[seg] (selection/coverage bias)
+  population_control_000: 2999.5     # independent total to check expanded OD against
+
+# ---------------------------------------------------------------------
+# DEGRADATION KNOBS — baseline = CLEAN. Dial to approach real-world data.
+# All appear in the sweep grid; recovery error must be reported as a FUNCTION of these.
+# ---------------------------------------------------------------------
+degradation:
+  telecom:
+    p_missing: 0.0                   # drop signalling events (data loss / partial)
+    p_oscillation: 0.0               # ping-pong; SCALED BY local cell density [v2 issue 3]
+    event_rate_multiplier: 1.0       # thin out CDR globally
+    osc_spread_dense_k: 1            # grid_disk ring in dense cells (tight)
+    osc_spread_sparse_k: 2           # grid_disk ring in sparse periphery (wide)
+  atto:
+    p_untapped: 0.0                  # fare evasion; enforcement-biased undercount [D2 6.5]
+    inactive_card_rate: 0.0          # issued != active (80k/360k inactive Jan-2025) [D2 5]
+    token_fragmentation: 0.0         # P(person appears under a NEW hashed ID per trip) — breaks trip-chaining [D2 6.3]
+  gps:
+    gps_jitter_m: 0.0                # position noise (m)
+    p_gps_dropout: 0.0               # missing pings (tunnel / urban canyon)
+    clock_jitter_s: 0.0
+
+sweep:                               # Cartesian product (or config subset) [v2 Step 8]
+  p_missing:             [0.0, 0.1, 0.3]
+  p_oscillation:         [0.0, 0.15, 0.3]
+  event_rate_multiplier: [0.5, 1.0]
+  couple_usage_to_demographics: [true, false]

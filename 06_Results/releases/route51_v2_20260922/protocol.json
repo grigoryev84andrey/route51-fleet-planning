@@ -1,0 +1,327 @@
+{
+  "protocol_id": "route51_v2_protocol",
+  "protocol_version": "1.0",
+  "frozen_date": "2026-09-22",
+  "release_id": "route51_v2_20260922",
+  "status": "frozen_before_new_effects_viewed",
+  "approval": {
+    "basis": "delegated",
+    "text": "Profile of EXECUTION_PLAN_LLM_2026-09-21_RU.md section 3 adopted by the executor under the author's delegation of 22.09.2026 (for this step and all following, choose the best option). Not an independent scientific decision recorded by the author; a revision by the author creates a new protocol version.",
+    "source": "EXECUTION_LOG.md, S05"
+  },
+  "scope_disclaimer": "Results describe the specified synthetic model of Tashkent Line 51 and do not establish operational benefits.",
+  "data": {
+    "fused_demand_matrix": {
+      "path": "06_Results/tables/fused_demand_matrix.csv",
+      "sha256": "2f0af31416d4723bfba55da2a3bcce8f51b1f45ae9e20f0b685210c048207b13",
+      "rows": 6974,
+      "total": 5764.0,
+      "status": "frozen, not regenerated"
+    },
+    "ground_truth_bus_od": {
+      "path": "05_Pipeline/route51_gen/output/ground_truth_bus_od.csv",
+      "sha256": "849ea81077dd4421992cfa606eaa065d68a29f1479fc4f4d308183f345901783",
+      "rows": 508,
+      "total": 5750
+    },
+    "quality_recomputed": {
+      "alight_cosine_wtd": 0.881564629531548,
+      "top20_od_recall": 0.65,
+      "function": "layer2_validate_v2"
+    },
+    "stop_order": "file order of 05_Pipeline/route51_gen/data/Busstations.csv (S01..S23); forward = S01->S23, reverse = S23->S01",
+    "demand_scale": {
+      "central": 3.0,
+      "sensitivity": [
+        1.0,
+        2.0,
+        3.0
+      ],
+      "evidence_type": "scenario_assumption"
+    }
+  },
+  "periods": {
+    "am_peak": [
+      [
+        7,
+        10
+      ]
+    ],
+    "midday": [
+      [
+        10,
+        16
+      ]
+    ],
+    "pm_peak": [
+      [
+        16,
+        19
+      ]
+    ],
+    "off_peak": [
+      [
+        5,
+        7
+      ],
+      [
+        19,
+        23
+      ]
+    ],
+    "note": "off_peak is two separate blocks; no trips and no waiting across the 07:00-19:00 gap"
+  },
+  "crowding": {
+    "model": "ramp",
+    "threshold_theta": 0.8,
+    "multiplier_at_full_capacity": 2.0,
+    "above_capacity": "linear_extension",
+    "formula": "lambda = 1 + (lambda_full - 1) * max(0, (phi - theta)/(1 - theta)); crowd_min = sum((lambda - 1) * L * t)",
+    "segment_times": "distance-proportional inter-stop times normalised so each direction sums to 41 min; layover excluded",
+    "load_basis": "relaxation: n = duration/headway, c = 90 + 60*share; after dispatch: actual trip counts and mean capacity per period block and direction",
+    "phi_gt_1": "flagged as exceeding full capacity; queues and denied boarding are not modelled",
+    "legacy_control": "crowd_penalty 10 overcrowding proxy kept only as legacy_overcrowd_proxy",
+    "model_version": "ivt_multiplier_v1",
+    "evidence_type": "scenario_assumption"
+  },
+  "operations": {
+    "capacity": {
+      "bus_12m": 90,
+      "bus_18m": 150,
+      "unit": "persons, full capacity",
+      "evidence_type": "scenario_assumption"
+    },
+    "relative_cost": {
+      "small": 1.0,
+      "large": 1.5,
+      "evidence_type": "scenario_assumption"
+    },
+    "tco_factor": 1.25,
+    "equity_delta_default": 0.2,
+    "fleet": 12,
+    "one_way_min": 41,
+    "layover_min": 4,
+    "route_km": 12.8,
+    "headway_spread": "(max(headway) - min(headway)) / mean(headway) across periods",
+    "large_vehicle_limit": null,
+    "cost_per_veh_km_uzs_12m": null
+  },
+  "optimisation": {
+    "objectives": [
+      "wait",
+      "cost",
+      "crowd_min"
+    ],
+    "algorithm": "NSGA-II (pymoo 0.6.2), SBX prob 0.9 eta 15, PM eta 20",
+    "population": 120,
+    "generations": 300,
+    "seeds": [
+      42,
+      43,
+      44
+    ],
+    "candidate_pool": "union of final non-dominated feasible solutions of the three central seeds",
+    "selection_rule": "minimise wait + crowd_min (pax-min/day) among candidates feasible after dispatch re-evaluation; ties: lower cost, then lexicographically smaller stable id '<seed>:<index>'",
+    "dispatch_fallback": "if the selected candidate is infeasible after dispatch, take the next candidate by the same rule; if none, report that no feasible executable candidate exists",
+    "convergence_criterion": "relative hypervolume gain over the last 20% of generations <= 1% for each of the three central seeds, common reference point per comparison; undefined if HV = 0",
+    "convergence_fallback": "one repeat with 600 generations for all three central seeds; any further extension or acceptance of limited convergence recorded before S14"
+  },
+  "dispatch": {
+    "blocks": "each continuous period block and direction separately",
+    "departures": "block_start + k*h for k = 0, 1, ... while < block_end; identical for both termini",
+    "fleet_mix": "n_large = floor(f*N + 0.5) per block and direction; trip k is large iff floor((k+1)*n_large/N) - floor(k*n_large/N) = 1",
+    "cohort": "planned departure in [07:00, 10:00) from the first stop of its direction, both directions",
+    "wait_after_dispatch": "uniform passenger arrivals within each block; wait per block = sum over gaps g of g^2/2 per unit arrival rate; first gap measured from block start",
+    "operational_feasibility": "unknown (no vehicle blocks or duty scheduling)"
+  },
+  "simulation": {
+    "engine": "SUMO 1.27.0",
+    "network": "two directional linear corridors S01->S23 and S23->S01, straight-line stop-to-stop lengths, 30 km/h, 2 lanes per direction with background traffic",
+    "begin": "06:30 (30 min warm-up)",
+    "end_guard": "11:30",
+    "service_trips": "all dispatch trips of both directions with planned departure in [06:30, 11:30); only cohort trips are measured",
+    "background": "randomTrips.py period 4 s, fringe factor 15, insertion over [06:30, 11:30), duarouter; missing SUMO_HOME/tools is an error, never a silent run without background",
+    "time_to_teleport_s": 300,
+    "dwell": "5 s + 1.5 s/pax * (1 - speedup * is_18m) * (boardings + alightings per trip at the stop, by direction and period), lognormal noise sigma 0.25, minimum 3 s",
+    "boarding_speedup_18m": {
+      "central": 0.3,
+      "sensitivity": [
+        0.0,
+        0.15,
+        0.3
+      ],
+      "applied_to": "actual vehicle type of each trip"
+    },
+    "seed_derivation": "SUMO --seed = run seed; randomTrips --seed = run seed; dwell noise rng = numpy default_rng(SeedSequence([run_seed, 2]))",
+    "invalid_run": [
+      "a cohort bus is planned but not inserted, not arrived by the guard end, teleported or removed",
+      "SUMO error or missing required tool",
+      "background generation failure"
+    ],
+    "background_teleports": "counted and reported per run; not an exclusion criterion",
+    "invalid_run_handling": "no seed replacement; an invalid run makes the series non-confirmatory; if the cause is only the guard limit, a documented fix and a full rerun with the same seeds under a new run_id"
+  },
+  "hypothesis": {
+    "id": "H1_bus_v2",
+    "statement": "In the specified synthetic model, the registered candidate plan reduces the mean full-trip bus duration of the 07:00-10:00 departure cohort, averaged over both directions, relative to the baseline timetable.",
+    "refinement_note": "Explicit refinement of the earlier passenger-time H1: the measured outcome is bus full-trip duration, not individual passenger in-vehicle time. The original formulation stays visible in the thesis.",
+    "not_equivalent_to": [
+      "passenger travel time",
+      "gen_cost",
+      "waiting"
+    ]
+  },
+  "primary_outcome": {
+    "per_bus": "tripinfo duration = arrival at the last stop - actual departure from the first stop, minutes",
+    "per_run": "mean over cohort buses within each direction, then 0.5*mean_fwd + 0.5*mean_rev",
+    "observation_unit": "one value per run (never individual buses)",
+    "reported_separately": [
+      "cohort buses per direction",
+      "direction means",
+      "departure delay (actual - planned)",
+      "cohort completeness"
+    ]
+  },
+  "experiment": {
+    "technical_series_K1": {
+      "baseline_seeds": [
+        900001,
+        900002,
+        900003
+      ],
+      "candidate_seeds": [
+        910001,
+        910002,
+        910003
+      ],
+      "evidence_kind": "exploratory"
+    },
+    "confirmatory_series": {
+      "baseline_seeds": [
+        100001,
+        100002,
+        100003,
+        100004,
+        100005,
+        100006,
+        100007,
+        100008,
+        100009,
+        100010,
+        100011,
+        100012,
+        100013,
+        100014,
+        100015,
+        100016,
+        100017,
+        100018,
+        100019,
+        100020,
+        100021,
+        100022,
+        100023,
+        100024,
+        100025,
+        100026,
+        100027,
+        100028,
+        100029,
+        100030
+      ],
+      "candidate_seeds": [
+        200001,
+        200002,
+        200003,
+        200004,
+        200005,
+        200006,
+        200007,
+        200008,
+        200009,
+        200010,
+        200011,
+        200012,
+        200013,
+        200014,
+        200015,
+        200016,
+        200017,
+        200018,
+        200019,
+        200020,
+        200021,
+        200022,
+        200023,
+        200024,
+        200025,
+        200026,
+        200027,
+        200028,
+        200029,
+        200030
+      ],
+      "n_per_condition": 30,
+      "evidence_kind": "confirmatory"
+    },
+    "sensitivity_seeds": "speedup 0%/15% candidate runs reuse candidate seeds 200001..200030; baseline shared when its condition fingerprint is identical; not independent samples of each other",
+    "n_fixed": "n is not increased after viewing the effect"
+  },
+  "analysis": {
+    "primary_test": "scipy.stats.ttest_ind(baseline, candidate, equal_var=False), two-sided",
+    "alpha": 0.05,
+    "delta": "baseline - candidate (positive = shorter duration under the candidate)",
+    "ci": "95% Welch-Satterthwaite interval of the difference of means",
+    "effect_status_rule": {
+      "ci_above_0": "improved",
+      "ci_below_0": "worsened",
+      "ci_contains_0": "inconclusive",
+      "protocol_failed": "not_tested"
+    },
+    "secondary_exploratory": [
+      "per-direction Welch tests",
+      "Cohen's d = delta / sqrt((s_b^2 + s_c^2)/2)",
+      "Mann-Whitney U two-sided as sensitivity, never a replacement of the primary test",
+      "headway regularity at the terminal (coefficient of variation)"
+    ],
+    "multiplicity": "single primary test; secondary analyses are exploratory and carry no confirmatory claims",
+    "practical_significance_threshold": null
+  },
+  "economics": {
+    "scopes": [
+      "am_peak",
+      "all_day_model",
+      "all_day_with_simulation (null until all periods are simulated)"
+    ],
+    "days_per_year": {
+      "value": 250,
+      "evidence_type": "scenario_assumption"
+    },
+    "value_of_time": "0.45 * net hourly wage, Tashkent city (MHOBT 1726), indicator 2.02.02.1200, 2026 Q1-Q2 mean, 12% PIT, 168 h/month",
+    "wait_weights": [
+      1,
+      2
+    ],
+    "operator_rate": null
+  },
+  "sensitivity_layer3": {
+    "crowding": "one factor at a time from central: theta 0.6/0.8/0.9; forms ramp/step/none; lambda_full 2/2.32",
+    "relative_cost": "r = 1.3/1.5/1.7 with seeds 42/43/44, same search budget",
+    "demand_scale": "x1/x2/x3 (layer 3 only)",
+    "controls": [
+      "simple rule: baseline headways kept, deterministic feasible integer fleet mix within the same budget",
+      "no telecom prior: re-fusion without the prior into a separate output"
+    ]
+  },
+  "K1_checks": [
+    "unit and integration tests of S03-S11 pass",
+    "3+3 technical runs: planned = inserted = arrived for every cohort bus; no cohort teleports or removals",
+    "both directions carry buses and demand; mixed fleet present in the candidate",
+    "dispatch identical in layer 3, SUMO input and export",
+    "constraints re-checked after discretisation",
+    "background present in every run",
+    "fingerprints recorded; no archive substitution",
+    "runtime measured to cost the full series"
+  ],
+  "tuning_rules": "Only technical settings (guard end, time-to-teleport) may change after K1, only to fix a documented defect, identically for both conditions and before S14; scientific coefficients are never tuned on trial effects."
+}
